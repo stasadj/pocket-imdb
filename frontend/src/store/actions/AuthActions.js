@@ -1,36 +1,36 @@
 import { LOGIN, AUTH_USER, REGISTER, LOGIN_ERROR, REGISTER_ERROR } from './ActionTypes';
 
-export const logIn = logInData => {
+export const logIn = (logInData) => {
   return {
     type: LOGIN,
-    payload: logInData
+    payload: logInData,
   };
 };
 
-export const register = registerData => {
+export const register = (registerData) => {
   return {
     type: REGISTER,
-    payload: registerData
+    payload: registerData,
   };
 };
 
-export const authUser = payload => {
+export const authUser = (payload) => {
   return {
     type: AUTH_USER,
-    payload
+    payload,
   };
 };
 
-export const loginError = payload => {
+export const loginError = (payload) => {
   return {
     type: LOGIN_ERROR,
-    payload
+    payload,
   };
 };
 
-export const registerError = payload => {
+export const registerError = (payload) => {
   return {
     type: REGISTER_ERROR,
-    payload
+    payload,
   };
 };

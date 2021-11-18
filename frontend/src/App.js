@@ -11,13 +11,13 @@ import './styles/css/bootstrap.min.css';
 const history = createBrowserHistory();
 
 const App = () => (
-    <Provider store={store}>
-        <BrowserRouter>
-            <div>
-                <AppLayout history={history} />
-            </div>
-        </BrowserRouter>
-    </Provider>
+  <Provider store={store}>
+    <BrowserRouter>
+      <div>
+        <AppLayout history={history} />
+      </div>
+    </BrowserRouter>
+  </Provider>
 );
 
 export default App;

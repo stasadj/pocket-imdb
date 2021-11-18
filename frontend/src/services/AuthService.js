@@ -3,7 +3,7 @@ import ApiService from './ApiService';
 const ENDPOINTS = {
   LOGIN: '/api/auth/login',
   REGISTER: '/api/auth/register',
-  LOGOUT: '/logout'
+  LOGOUT: '/logout',
 };
 
 class AuthService extends ApiService {
@@ -27,12 +27,12 @@ class AuthService extends ApiService {
     const token = this.getToken();
     if (token) {
       this.api.attachHeaders({
-        Authorization: `Bearer ${token.access_token}`
+        Authorization: `Bearer ${token.access_token}`,
       });
     }
   };
 
-  createSession = user => {
+  createSession = (user) => {
     localStorage.setItem('user', JSON.stringify(user));
     this.setAuthorizationHeader();
   };
@@ -42,13 +42,13 @@ class AuthService extends ApiService {
     this.api.removeHeaders(['Authorization']);
   };
 
-  login = async loginData => {
+  login = async (loginData) => {
     const { data } = await this.apiClient.post(ENDPOINTS.LOGIN, loginData);
     this.createSession(data);
     return data;
   };
 
-  signup = async signupData => {
+  signup = async (signupData) => {
     const { data } = await this.apiClient.post(ENDPOINTS.REGISTER, signupData);
 
     return data;
@@ -75,7 +75,7 @@ class AuthService extends ApiService {
     return JSON.parse(user);
   };
 
-  updateUserInStorage = property => {
+  updateUserInStorage = (property) => {
     const user = localStorage.getItem('user');
     let jsonUser = JSON.parse(user);
     jsonUser = { ...jsonUser, ...property };

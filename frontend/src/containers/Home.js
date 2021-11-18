@@ -11,10 +11,10 @@ const Home = () => {
 
   useEffect(() => {
     dispatch(getMovies());
-  }, [])
+  }, []);
 
   const renderMovies = () => {
-    return movies.map(movie => <MovieCard key={movie.id} movie={movie} />);
+    return movies.map((movie) => <MovieCard key={movie.id} movie={movie} />);
   };
 
   return (
@@ -24,7 +24,6 @@ const Home = () => {
       {renderMovies()}
     </div>
   );
-}
+};
 
 export default Home;
-

@@ -14,6 +14,6 @@ const AppLayout = () => {
       <Route exact path="/login" component={Login} />
     </div>
   );
-}
+};
 
 export default AppLayout;

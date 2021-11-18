@@ -7,17 +7,18 @@ import { selectLoginError } from '../../store/selectors/AuthSelectors';
 const Login = () => {
   const [loginData, setLoginData] = useState({
     email: '',
-    password: ''
+    password: '',
   });
   const dispatch = useDispatch();
-  const loginError = useSelector(selectLoginError)
+  const loginError = useSelector(selectLoginError);
 
-  const handleInputChange = field => event => setLoginData({
-    ...loginData,
-    [field]: event.target.value
-  });
+  const handleInputChange = (field) => (event) =>
+    setLoginData({
+      ...loginData,
+      [field]: event.target.value,
+    });
 
-  const submit = event => {
+  const submit = (event) => {
     event.preventDefault();
 
     dispatch(logIn(loginData));
@@ -44,6 +45,6 @@ const Login = () => {
       </form>
     </div>
   );
-}
+};
 
 export default Login;
