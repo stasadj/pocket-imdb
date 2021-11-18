@@ -1,6 +1,7 @@
 import os
 import sentry_sdk
 import sys
+import dotenv
 
 from datetime import timedelta
 from sentry_sdk.integrations.django import DjangoIntegration
@@ -9,6 +10,9 @@ from os.path import join
 TESTING = sys.argv[1:2] == ['test']
 
 ROOT_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+if not TESTING:
+    dotenv.read_dotenv(ROOT_DIR)
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -102,11 +106,11 @@ CELERY_TIMEZONE = 'UTC'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'pocket-imdb',
-        'USER': 'root',
-        'PASSWORD': '',
-        'HOST': 'localhost',
-        'PORT': '3306',
+        'NAME': os.getenv('DB_NAME'),
+        'USER': os.getenv('DB_USER'),
+        'PASSWORD': os.getenv('DB_PASSWORD'),
+        'HOST': os.getenv('DB_HOST', 'db'),
+        'PORT': os.getenv('DB_PORT'),
     }
 }
 
