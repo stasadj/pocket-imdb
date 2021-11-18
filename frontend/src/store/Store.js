@@ -10,7 +10,7 @@ const sagaMiddleware = createSagaMiddleware();
 const history = createBrowserHistory();
 const store = createStore(
   rootReducer(history),
-  applyMiddleware(routerMiddleware(history), sagaMiddleware)
+  applyMiddleware(routerMiddleware(history), sagaMiddleware),
 );
 
 sagaMiddleware.run(rootSaga);

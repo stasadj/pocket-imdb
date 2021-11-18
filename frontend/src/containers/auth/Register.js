@@ -8,17 +8,18 @@ const Register = () => {
   const [registerData, setRegisterData] = useState({
     email: '',
     password: '',
-    name: ''
+    name: '',
   });
   const dispatch = useDispatch();
   const registerError = useSelector(selectRegisterError);
 
-  const handleInputChange = field => event => setRegisterData({
-    ...registerData,
-    [field]: event.target.value
-  });
+  const handleInputChange = (field) => (event) =>
+    setRegisterData({
+      ...registerData,
+      [field]: event.target.value,
+    });
 
-  const submit = event => {
+  const submit = (event) => {
     event.preventDefault();
 
     dispatch(register(registerData));
@@ -51,6 +52,6 @@ const Register = () => {
       </form>
     </div>
   );
-}
+};
 
 export default Register;

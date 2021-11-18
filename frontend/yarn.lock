@@ -7812,6 +7812,11 @@
   "resolved" "https://registry.npmjs.org/preserve/-/preserve-0.2.0.tgz"
   "version" "0.2.0"
 
+"prettier@^2.4.1":
+  "integrity" "sha512-9fbDAXSBcc6Bs1mZrDYb3XKzDLm4EXXL9sC1LqKP5rZkT6KRr/rf9amVUcODVXgguK/isJz0d0hP72WeaKWsvA=="
+  "resolved" "https://registry.npmjs.org/prettier/-/prettier-2.4.1.tgz"
+  "version" "2.4.1"
+
 "pretty-bytes@^4.0.2":
   "integrity" "sha1-sr+C5zUNZcbDOqlaqlpPYyf2HNk="
   "resolved" "https://registry.npmjs.org/pretty-bytes/-/pretty-bytes-4.0.2.tgz"

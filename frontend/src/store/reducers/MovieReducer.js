@@ -1,7 +1,7 @@
 import { SET_MOVIES } from '../actions/ActionTypes';
 
 const initialState = {
-  all: []
+  all: [],
 };
 const movieReducer = (state = initialState, action) => {
   switch (action.type) {

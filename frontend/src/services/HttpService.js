@@ -13,7 +13,7 @@ class HttpService {
   }
 
   removeHeaders(headerKeys) {
-    headerKeys.forEach(key => delete this.client.defaults.headers[key]);
+    headerKeys.forEach((key) => delete this.client.defaults.headers[key]);
   }
 
   handleSuccessResponse(response) {
@@ -41,7 +41,7 @@ class HttpService {
 }
 
 const options = {
-  baseURL: config.API_BASE_URL
+  baseURL: config.API_BASE_URL,
 };
 const httpService = new HttpService(options);
 

@@ -7,6 +7,6 @@ export default function* rootSaga() {
   yield all([
     takeLatest(LOGIN, userLogin),
     takeLatest(REGISTER, userRegister),
-    takeLatest(GET_MOVIES, moviesGet)
+    takeLatest(GET_MOVIES, moviesGet),
   ]);
 }
