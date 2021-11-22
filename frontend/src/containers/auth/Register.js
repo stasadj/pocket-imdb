@@ -58,7 +58,7 @@ const Register = () => {
 
   return (
     <Container>
-      <h2 className="mb-4 mt-5">Register to see the movies!</h2>
+      <h2 className="mb-4 mt-5">Register to see movies</h2>
       <Form onSubmit={submit}>
         <Form.Group className="col-4 offset-4 mb-2">
           <Form.Label>Email address</Form.Label>

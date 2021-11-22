@@ -37,7 +37,7 @@ const Login = () => {
 
   return (
     <Container>
-      <h2 className="mb-4 mt-5">Log in to see the movies!</h2>
+      <h2 className="mb-4 mt-5">Log in to see movies</h2>
       <Form onSubmit={submit}>
         <Form.Group className="col-4 offset-4 mb-3">
           <Form.Label>Email</Form.Label>
