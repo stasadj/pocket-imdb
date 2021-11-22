@@ -1,17 +1,18 @@
 import React from 'react';
-import { Route } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 
 import Login from '../containers/auth/Login';
 import Register from '../containers/auth/Register';
-import Home from '../containers/Home';
-import PrivateRoute from '../containers/PrivateRoute';
+import NavBar from './NavBar';
 
 const AppLayout = () => {
   return (
-    <div>
-      <PrivateRoute exact path="/home" component={Home} />
-      <Route exact path="/register" component={Register} />
-      <Route exact path="/login" component={Login} />
+    <div className="App">
+      <NavBar />
+      <Routes>
+        <Route exact path="/register" element={<Register />} />
+        <Route exact path="/login" element={<Login />} />
+      </Routes>
     </div>
   );
 };
