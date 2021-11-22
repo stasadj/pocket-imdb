@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { register } from '../../store/actions/AuthActions';
@@ -8,101 +8,87 @@ import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 
+import { useFormik } from 'formik';
+
+const validate = (values) => {
+  const errors = {};
+
+  if (!values.email) {
+    errors.email = 'Required.';
+  } else if (!values.email.match('([a-zA-Z]+[0-9.]?){3,255}@[.a-z]{2,10}')) {
+    errors.email = 'Invalid email address.';
+  }
+  if (!values.password) {
+    errors.password = 'Required.';
+  } else if (!values.password.match('[0-9A-Za-z]{4,}')) {
+    errors.password = 'Invalid password.';
+  }
+  if (!values.name) {
+    errors.name = 'Required.';
+  }
+
+  return errors;
+};
+
 const Register = () => {
-  const [registerData, setRegisterData] = useState({
-    email: '',
-    password: '',
-    name: '',
-  });
   const dispatch = useDispatch();
   const registerError = useSelector(selectRegisterError);
 
-  const handleInputChange = (field) => (event) =>
-    setRegisterData({
-      ...registerData,
-      [field]: event.target.value,
-    });
-
-  const submit = (event) => {
-    event.preventDefault();
-
-    if (validateForm()) {
-      dispatch(register(registerData));
-    }
-  };
-
-  const validateForm = () => {
-    document.getElementById('small-email').style.visibility = 'hidden';
-    document.getElementById('small-password').style.visibility = 'hidden';
-    document.getElementById('small-name').style.visibility = 'hidden';
-
-    let valid = true;
-
-    if (!registerData.email.match('([a-zA-Z]+[0-9.]?){3,255}@[.a-z]{2,10}')) {
-      document.getElementById('small-email').style.visibility = 'visible';
-      valid = false;
-    }
-
-    if (!registerData.password.match('[0-9A-Za-z]{4,}')) {
-      document.getElementById('small-password').style.visibility = 'visible';
-      valid = false;
-    }
-
-    if (!registerData.name.match('[A-Z][a-z]{2,}')) {
-      document.getElementById('small-name').style.visibility = 'visible';
-      valid = false;
-    }
-
-    return valid;
-  };
+  const formik = useFormik({
+    initialValues: {
+      email: '',
+      password: '',
+      name: '',
+    },
+    validate,
+    onSubmit: (values) => dispatch(register(values)),
+  });
 
   return (
     <Container>
       <h2 className="mb-4 mt-5">Register to see movies</h2>
-      <Form onSubmit={submit}>
-        <Form.Group className="col-4 offset-4 mb-2">
+      <Form onSubmit={formik.handleSubmit}>
+        <Form.Group className="col-4 offset-4 mb-3">
           <Form.Label>Email address</Form.Label>
           <Form.Control
+            id="email"
+            name="email"
             type="text"
             placeholder="Enter your email address"
-            value={registerData.email}
-            onChange={handleInputChange('email')}
+            value={formik.values.email}
+            onChange={formik.handleChange}
           />
-          <small
-            id="small-email"
-            className="form-text text-danger"
-            style={{ visibility: 'hidden' }}
-          >
-            Invalid email address.
-          </small>
+          {formik.errors.email && (
+            <small className="form-text text-danger">{formik.errors.email}</small>
+          )}
         </Form.Group>
-        <Form.Group className="col-4 offset-4 mb-2">
+        <Form.Group className="col-4 offset-4 mb-3">
           <Form.Label>Password</Form.Label>
           <Form.Control
+            id="password"
+            name="password"
             type="password"
             placeholder="Enter password"
-            value={registerData.password}
-            onChange={handleInputChange('password')}
+            value={formik.values.password}
+            onChange={formik.handleChange}
           />
-          <small
-            id="small-password"
-            className="form-text text-danger"
-            style={{ visibility: 'hidden' }}
-          >
-            Invalid password.
-          </small>
+          {formik.errors.password && (
+            <small className="form-text text-danger">{formik.errors.password}</small>
+          )}
         </Form.Group>
-        <Form.Group className="col-4 offset-4 mb-2">
+        <Form.Group className="col-4 offset-4 mb-3">
           <Form.Label>Name</Form.Label>
           <Form.Control
+            id="name"
+            name="name"
             type="text"
             placeholder="Enter your name"
-            value={registerData.name}
-            onChange={handleInputChange('name')}
+            value={formik.values.name}
+            onChange={formik.handleChange}
           />
-          <small id="small-name" className="form-text text-danger" style={{ visibility: 'hidden' }}>
-            Invalid name.
-          </small>
+          {formik.errors.name && (
+            <small className="form-text text-danger">{formik.errors.name}</small>
+          )}
         </Form.Group>
         <Button variant="success" type="submit">
           Register

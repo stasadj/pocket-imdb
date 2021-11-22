@@ -12,6 +12,8 @@ import { logOut } from '../store/actions/AuthActions';
 
 import { useTranslation } from 'react-i18next';
 
+import { LOGIN, REGISTER, HOME, ABOUT } from '../routes/routes';
+
 const NavBar = () => {
   const isLoggedIn = useSelector(selectIsLoggedIn);
   const navigate = useNavigate();
@@ -25,16 +27,16 @@ const NavBar = () => {
   return (
     <Navbar bg="light" expand="lg">
       <Container>
-        <NavLink className="navbar-brand" to="">
+        <NavLink className="navbar-brand" to={HOME}>
           Pocket-IMDB
         </NavLink>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
-            <NavLink className="nav-link" to="">
+            <NavLink className="nav-link" to={HOME}>
               {t('Home')}
             </NavLink>
-            <NavLink className="nav-link" to="about">
+            <NavLink className="nav-link" to={ABOUT}>
               {t('About app')}
             </NavLink>
           </Nav>
@@ -52,12 +54,12 @@ const NavBar = () => {
           </Button>
         )}
         {!isLoggedIn && (
-          <Button variant="success" className="mx-1" onClick={() => navigate('/login')}>
+          <Button variant="success" className="mx-1" onClick={() => navigate(LOGIN)}>
             {t('Log in')}
           </Button>
         )}
         {!isLoggedIn && (
-          <Button variant="outline-success" onClick={() => navigate('/register')}>
+          <Button variant="outline-success" onClick={() => navigate(REGISTER)}>
             {t('Register')}
           </Button>
         )}
