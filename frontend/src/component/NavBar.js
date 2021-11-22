@@ -28,7 +28,7 @@ const NavBar = () => {
     <Navbar bg="light" expand="lg">
       <Container>
         <NavLink className="navbar-brand" to={HOME}>
-          Pocket-IMDB
+          PocketIMDB
         </NavLink>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
