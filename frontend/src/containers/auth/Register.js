@@ -9,26 +9,22 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 
 import { useFormik } from 'formik';
+import * as Yup from 'yup';
 
-const validate = (values) => {
-  const errors = {};
-
-  if (!values.email) {
-    errors.email = 'Required.';
-  } else if (!values.email.match('([a-zA-Z]+[0-9.]?){3,255}@[.a-z]{2,10}')) {
-    errors.email = 'Invalid email address.';
-  }
-  if (!values.password) {
-    errors.password = 'Required.';
-  } else if (!values.password.match('[0-9A-Za-z]{4,}')) {
-    errors.password = 'Invalid password.';
-  }
-  if (!values.name) {
-    errors.name = 'Required.';
-  }
-
-  return errors;
-};
+const validationSchema = Yup.object({
+  email: Yup.string()
+    .max(255, 'Must be 255 characters or less')
+    .email('Invalid email address')
+    .required('Required'),
+  password: Yup.string()
+    .min(5, 'Must be 5 characters at least')
+    .max(30, 'Must be 30 characters or less')
+    .required('Required'),
+  name: Yup.string()
+    .min(2, 'Must be 2 characters at least')
+    .max(30, 'Must be 30 characters or less')
+    .required('Required'),
+});
 
 const Register = () => {
   const dispatch = useDispatch();
@@ -40,7 +36,7 @@ const Register = () => {
       password: '',
       name: '',
     },
-    validate,
+    validationSchema: validationSchema,
     onSubmit: (values) => dispatch(register(values)),
   });
 
@@ -58,7 +54,7 @@ const Register = () => {
             value={formik.values.email}
             onChange={formik.handleChange}
           />
-          {formik.errors.email && (
+          {formik.touched.email && formik.errors.email && (
             <small className="form-text text-danger">{formik.errors.email}</small>
           )}
         </Form.Group>
@@ -72,7 +68,7 @@ const Register = () => {
             value={formik.values.password}
             onChange={formik.handleChange}
           />
-          {formik.errors.password && (
+          {formik.touched.password && formik.errors.password && (
             <small className="form-text text-danger">{formik.errors.password}</small>
           )}
         </Form.Group>
@@ -86,7 +82,7 @@ const Register = () => {
             value={formik.values.name}
             onChange={formik.handleChange}
           />
-          {formik.errors.name && (
+          {formik.touched.name && formik.errors.name && (
             <small className="form-text text-danger">{formik.errors.name}</small>
           )}
         </Form.Group>
