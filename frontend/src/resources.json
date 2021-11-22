@@ -1,0 +1,32 @@
+{
+  "en": {
+    "translation": {
+      "About": "Simple To-Do List Application!",
+      "About app": "About",
+      "Home": "Home",
+      "Profile": "Profile",
+      "Dashboard": "Dashboard",
+      "Log in": "Log in",
+      "Register": "Register",
+      "First Name": "First Name",
+      "Add ToDo": "Add ToDo",
+      "Log out": "Log out",
+      "Welcome": "Welcome to To-Do List application!"
+    }
+  },
+  "srb": {
+    "translation": {
+      "About": "Jednostavna To-Do aplikacija!",
+      "About app": "O aplikaciji",
+      "Home": "Početna",
+      "Profile": "Moj profil",
+      "Dashboard": "Zadaci",
+      "Log in": "Prijavi se",
+      "Register": "Registruj se",
+      "First Name": "Ime",
+      "Add ToDo": "Dodaj zadatak",
+      "Log out": "Odjavi se",
+      "Welcome": "Dobrodošli u To-Do List aplikaciju!"
+    }
+  }
+}

@@ -26,3 +26,15 @@ export function* userRegister({ payload }) {
     yield put(registerError(true));
   }
 }
+
+export function* userLogout({ payload }) {
+  try {
+    yield call(AuthService.logout, payload);
+
+    yield put(authUser(false));
+    yield put(push('/login'));
+    yield put(go());
+  } catch (error) {
+    yield put(loginError(false));
+  }
+}
