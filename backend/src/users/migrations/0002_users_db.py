@@ -7,7 +7,7 @@ def populate_database(apps, schema_editor):
     User = apps.get_model('users', 'User')
 
     User.objects.create(
-        username='pera',
+        username='pera@test.com',
         password='pw123',
         first_name='Pera',
         last_name='Peric',
@@ -15,7 +15,7 @@ def populate_database(apps, schema_editor):
         is_staff=False)
 
     User.objects.create(
-        username='mika',
+        username='mika@test.com',
         password='pw123',
         first_name='Mika',
         last_name='Mikic',
