@@ -19,5 +19,5 @@ from src.auths import views
 
 urlpatterns = [
     path('api/auth/login', views.login),
-    path('api/auth/register', views.login),
+    path('api/auth/register', views.register),
 ]
