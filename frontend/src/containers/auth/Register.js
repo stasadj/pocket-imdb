@@ -89,7 +89,7 @@ const Register = () => {
         <Button variant="success" type="submit">
           Register
         </Button>
-        {registerError && <p className="form-text text-danger mt-2">User already exists.</p>}
+        {registerError && <p className="form-text text-danger mt-2">User already exists</p>}
       </Form>
     </Container>
   );
