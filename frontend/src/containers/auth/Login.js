@@ -9,21 +9,12 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 
 import { useFormik } from 'formik';
+import * as Yup from 'yup';
 
-const validate = (values) => {
-  const errors = {};
-
-  if (!values.email) {
-    errors.email = 'Required.';
-  } else if (!values.email.match('([a-zA-Z]+[0-9.]?){3,255}@[.a-z]{2,10}')) {
-    errors.email = 'Invalid email address.';
-  }
-  if (!values.password) {
-    errors.password = 'Required.';
-  }
-
-  return errors;
-};
+const validationSchema = Yup.object({
+  email: Yup.string().max(255).email('Invalid email address').required('Required'),
+  password: Yup.string().min(5, 'Must be 5 characters at least').required('Required'),
+});
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -34,7 +25,7 @@ const Login = () => {
       email: '',
       password: '',
     },
-    validate,
+    validationSchema: validationSchema,
     onSubmit: (values) => dispatch(logIn(values)),
   });
 
@@ -52,7 +43,7 @@ const Login = () => {
             value={formik.values.email}
             onChange={formik.handleChange}
           />
-          {formik.errors.email && (
+          {formik.touched.email && formik.errors.email && (
             <p className="form-text text-danger mt-2">{formik.errors.email}</p>
           )}
         </Form.Group>
@@ -66,14 +57,18 @@ const Login = () => {
             value={formik.values.password}
             onChange={formik.handleChange}
           />
-          {formik.errors.password && (
+          {formik.touched.password && formik.errors.password && (
             <p className="form-text text-danger mt-2">{formik.errors.password}</p>
           )}
         </Form.Group>
         <Button variant="success" type="submit">
           Log in
         </Button>
-        {loginError && <p className="form-text text-danger mt-2">Invalid email or password.</p>}
+        {loginError && (
+          <p className="form-text text-danger mt-2">
+            Use not found. Check your credentials and try again
+          </p>
+        )}
       </Form>
     </Container>
   );
