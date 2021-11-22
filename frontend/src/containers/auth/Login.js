@@ -13,6 +13,7 @@ const Login = () => {
     email: '',
     password: '',
   });
+  const [invalidEmail, setInvalidEmail] = useState(false);
   const dispatch = useDispatch();
   const loginError = useSelector(selectLoginError);
 
@@ -24,13 +25,19 @@ const Login = () => {
 
   const submit = (event) => {
     event.preventDefault();
+    setInvalidEmail(false);
+
+    if (!loginData.email.match('([a-zA-Z]+[0-9.]?){3,255}@[.a-z]{2,10}$')) {
+      setInvalidEmail(true);
+      return;
+    }
 
     dispatch(logIn(loginData));
   };
 
   return (
     <Container>
-      <h2 className="col-4 offset-4 mb-4 mt-5">Log in to see the movies!</h2>
+      <h2 className="mb-4 mt-5">Log in to see the movies!</h2>
       <Form onSubmit={submit}>
         <Form.Group className="col-4 offset-4 mb-3">
           <Form.Label>Email</Form.Label>
@@ -40,6 +47,7 @@ const Login = () => {
             value={loginData.email}
             onChange={handleInputChange('email')}
           />
+          {invalidEmail && <p className="form-text text-danger mt-2">Invalid email address.</p>}
         </Form.Group>
         <Form.Group className="col-4 offset-4 mb-3">
           <Form.Label>Password</Form.Label>
@@ -49,11 +57,11 @@ const Login = () => {
             value={loginData.password}
             onChange={handleInputChange('password')}
           />
+          {loginError && <p className="form-text text-danger mt-2">Invalid email or password.</p>}
         </Form.Group>
         <Button variant="success" type="submit">
           Log in
         </Button>
-        {loginError && <p>Login error</p>}
       </Form>
     </Container>
   );

@@ -1,7 +1,7 @@
 {
   "en": {
     "translation": {
-      "About": "Simple To-Do List Application!",
+      "About": "Pocket-IMDB Application",
       "About app": "About",
       "Home": "Home",
       "Profile": "Profile",
@@ -11,12 +11,12 @@
       "First Name": "First Name",
       "Add ToDo": "Add ToDo",
       "Log out": "Log out",
-      "Welcome": "Welcome to To-Do List application!"
+      "Welcome": "Welcome to Pocket-IMDB application!"
     }
   },
   "srb": {
     "translation": {
-      "About": "Jednostavna To-Do aplikacija!",
+      "About": "Pocket-IMDB Aplikacija!",
       "About app": "O aplikaciji",
       "Home": "Početna",
       "Profile": "Moj profil",
@@ -26,7 +26,7 @@
       "First Name": "Ime",
       "Add ToDo": "Dodaj zadatak",
       "Log out": "Odjavi se",
-      "Welcome": "Dobrodošli u To-Do List aplikaciju!"
+      "Welcome": "Dobrodošli u Pocket-IMDB aplikaciju!"
     }
   }
 }

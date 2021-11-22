@@ -1,12 +1,15 @@
 import React from 'react';
+
 import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import Button from 'react-bootstrap/Button';
+
 import { NavLink, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectIsLoggedIn } from '../store/selectors/AuthSelectors';
 import { logOut } from '../store/actions/AuthActions';
+
 import { useTranslation } from 'react-i18next';
 
 const NavBar = () => {
