@@ -9,6 +9,8 @@ import Home from '../containers/Home';
 import { useSelector } from 'react-redux';
 import { selectIsLoggedIn } from '../store/selectors/AuthSelectors';
 
+import { REGISTER, ANY } from '../routes/routes';
+
 const AppLayout = () => {
   const isLoggedIn = useSelector(selectIsLoggedIn);
 
@@ -16,9 +18,9 @@ const AppLayout = () => {
     <div className="App">
       <NavBar />
       <Routes>
-        {isLoggedIn && <Route path="*" element={<Home />} />}
-        {!isLoggedIn && <Route path="*" element={<Login />} />}
-        {!isLoggedIn && <Route exact path="/register" element={<Register />} />}
+        {isLoggedIn && <Route path={ANY} element={<Home />} />}
+        {!isLoggedIn && <Route path={ANY} element={<Login />} />}
+        {!isLoggedIn && <Route exact path={REGISTER} element={<Register />} />}
       </Routes>
     </div>
   );
