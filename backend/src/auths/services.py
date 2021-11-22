@@ -17,4 +17,4 @@ def login(request):
 def register(request):
     user = json.loads(request.body)
     return User.objects.create(email=user['email'], password=user['password'],
-                               first_name=user['firstName'], last_name=user['lastName'])
+                               first_name=user['name'], username=user['email'])

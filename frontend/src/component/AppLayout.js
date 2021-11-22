@@ -19,7 +19,6 @@ const AppLayout = () => {
         {isLoggedIn && <Route path="*" element={<Home />} />}
         {!isLoggedIn && <Route path="*" element={<Login />} />}
         {!isLoggedIn && <Route exact path="/register" element={<Register />} />}
-        {!isLoggedIn && <Route exact path="/login" element={<Login />} />}
       </Routes>
     </div>
   );

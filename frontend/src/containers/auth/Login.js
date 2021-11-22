@@ -27,7 +27,7 @@ const Login = () => {
     event.preventDefault();
     setInvalidEmail(false);
 
-    if (!loginData.email.match('([a-zA-Z]+[0-9.]?){3,255}@[.a-z]{2,10}$')) {
+    if (!loginData.email.match('([a-zA-Z]+[0-9.]?){3,255}@[.a-z]{2,10}')) {
       setInvalidEmail(true);
       return;
     }
@@ -57,11 +57,11 @@ const Login = () => {
             value={loginData.password}
             onChange={handleInputChange('password')}
           />
-          {loginError && <p className="form-text text-danger mt-2">Invalid email or password.</p>}
         </Form.Group>
         <Button variant="success" type="submit">
           Log in
         </Button>
+        {loginError && <p className="form-text text-danger mt-2">Invalid email or password.</p>}
       </Form>
     </Container>
   );
