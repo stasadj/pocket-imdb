@@ -34,7 +34,6 @@ class AuthService extends ApiService {
 
   createSession = (user) => {
     localStorage.setItem('user', JSON.stringify(user));
-    console.log(user);
     this.setAuthorizationHeader();
   };
 
