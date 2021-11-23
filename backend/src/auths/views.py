@@ -1,9 +1,17 @@
-from rest_framework.views import APIView
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
-from .services import login
+from . import services
+from src.users.serializers import UserSerializer
 
 
-class LoginAPIView(APIView):
+@api_view(http_method_names=['POST'])
+@permission_classes([AllowAny])
+def login(request):
+    return Response(services.login(request))
 
-    def post(self, request, format=None):
-        return Response(login(request))
+
+@api_view(http_method_names=['POST'])
+@permission_classes([AllowAny])
+def register(request):
+    return Response(UserSerializer(services.register(request)).data)

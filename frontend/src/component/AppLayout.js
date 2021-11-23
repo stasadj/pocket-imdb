@@ -1,17 +1,27 @@
 import React from 'react';
-import { Route } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 
 import Login from '../containers/auth/Login';
 import Register from '../containers/auth/Register';
+import NavBar from './NavBar';
 import Home from '../containers/Home';
-import PrivateRoute from '../containers/PrivateRoute';
+
+import { useSelector } from 'react-redux';
+import { selectIsLoggedIn } from '../store/selectors/AuthSelectors';
+
+import { REGISTER, ANY } from '../routes/routes';
 
 const AppLayout = () => {
+  const isLoggedIn = useSelector(selectIsLoggedIn);
+
   return (
-    <div>
-      <PrivateRoute exact path="/home" component={Home} />
-      <Route exact path="/register" component={Register} />
-      <Route exact path="/login" component={Login} />
+    <div className="App">
+      <NavBar />
+      <Routes>
+        {isLoggedIn && <Route path={ANY} element={<Home />} />}
+        {!isLoggedIn && <Route path={ANY} element={<Login />} />}
+        {!isLoggedIn && <Route exact path={REGISTER} element={<Register />} />}
+      </Routes>
     </div>
   );
 };
