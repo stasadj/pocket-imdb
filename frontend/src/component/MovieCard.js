@@ -14,7 +14,7 @@ const MovieCard = ({ movie }) => {
       <Card.Body>
         <Card.Title>{movie.title}</Card.Title> <Card.Text>{movie.description}</Card.Text>
       </Card.Body>
-      <Card.Footer>
+      <Card.Footer style={{ border: '1px solid lightgrey' }}>
         <small className="text-muted">{movie.genre}</small>
       </Card.Footer>
     </Card>
