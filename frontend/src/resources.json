@@ -11,7 +11,13 @@
       "First Name": "First Name",
       "Add ToDo": "Add ToDo",
       "Log out": "Log out",
-      "Welcome": "Welcome to Pocket-IMDB application!"
+      "Welcome": "Welcome to Pocket-IMDB application!",
+      "Invalid email": "Invalid email address",
+      "5 or less": "Must be 5 characters at least",
+      "Required": "Required",
+      "Enter email address": "Enter email address",
+      "Log in to see movies": "Log in to see movies",
+      "Enter password": "Enter password"
     }
   },
   "srb": {
@@ -26,7 +32,13 @@
       "First Name": "Ime",
       "Add ToDo": "Dodaj zadatak",
       "Log out": "Odjavi se",
-      "Welcome": "Dobrodošli u Pocket-IMDB aplikaciju!"
+      "Welcome": "Dobrodošli u Pocket-IMDB aplikaciju!",
+      "Invalid email": "Nevalidna email adresa",
+      "5 or less": "Mora sadržati najmanje 5 karaktera",
+      "Required": "Obavezno",
+      "Enter email address": "Unesite email adresu",
+      "Log in to see movies": "Prijavite se da biste pregledali filmove",
+      "Enter password": "Unesite lozinku"
     }
   }
 }

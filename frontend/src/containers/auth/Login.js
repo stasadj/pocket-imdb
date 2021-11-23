@@ -11,6 +11,8 @@ import Button from 'react-bootstrap/Button';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 
+import { useTranslation } from 'react-i18next';
+
 const validationSchema = Yup.object({
   email: Yup.string().max(255).email('Invalid email address').required('Required'),
   password: Yup.string().min(5, 'Must be 5 characters at least').required('Required'),
@@ -19,6 +21,7 @@ const validationSchema = Yup.object({
 const Login = () => {
   const dispatch = useDispatch();
   const loginError = useSelector(selectLoginError);
+  const { t } = useTranslation();
 
   const formik = useFormik({
     initialValues: {
@@ -31,7 +34,7 @@ const Login = () => {
 
   return (
     <Container>
-      <h2 className="mb-4 mt-5">Log in to see movies</h2>
+      <h2 className="mb-4 mt-5">{t('Log in to see movies')}</h2>
       <Form onSubmit={formik.handleSubmit}>
         <Form.Group className="col-4 offset-4 mb-3">
           <Form.Label>Email</Form.Label>
@@ -39,7 +42,7 @@ const Login = () => {
             id="email"
             name="email"
             type="text"
-            placeholder="Enter email address"
+            placeholder={t('Enter email address')}
             value={formik.values.email}
             onChange={formik.handleChange}
           />
@@ -53,7 +56,7 @@ const Login = () => {
             id="password"
             name="password"
             type="password"
-            placeholder="Enter password"
+            placeholder={t('Enter password')}
             value={formik.values.password}
             onChange={formik.handleChange}
           />
@@ -62,7 +65,7 @@ const Login = () => {
           )}
         </Form.Group>
         <Button variant="success" type="submit">
-          Log in
+          {t('Log in')}
         </Button>
         {loginError && (
           <p className="form-text text-danger mt-2">

@@ -27,7 +27,7 @@ class AuthService extends ApiService {
     const token = this.getToken();
     if (token) {
       this.api.attachHeaders({
-        Authorization: `Bearer ${token.access_token}`,
+        Authorization: `Bearer ${token}`,
       });
     }
   };
@@ -61,8 +61,8 @@ class AuthService extends ApiService {
   };
 
   getToken = () => {
-    const user = localStorage.getItem('user');
-    return user ? JSON.parse(user).access_token : undefined;
+    const user = JSON.parse(localStorage.getItem('user'));
+    return user ? user.access_token : undefined;
   };
 
   isAuthenticated = () => {
