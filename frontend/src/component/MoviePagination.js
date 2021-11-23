@@ -19,7 +19,7 @@ const MoviePagination = ({ active, pages, onClick }) => {
       <Pagination.First onClick={() => onClick(1)} />
       <Pagination.Prev onClick={() => onClick(active - 1)} disabled={active === 0} />
       {getItems()}
-      <Pagination.Next onClick={() => onClick(active + 1)} disabled={active === pages - 1} />
+      <Pagination.Next onClick={() => onClick(active + 1)} disabled={active === pages} />
       <Pagination.Last onClick={() => onClick(pages)} />
     </Pagination>
   );
