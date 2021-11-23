@@ -22,7 +22,7 @@ const MoviePage = () => {
     dispatch(getMovie(params.id));
   }, []);
   return (
-    <Container className="offset-2 col-11">
+    <Container className="offset-2 col-11" style={{ marginTop: '90px' }}>
       <Card style={{ maxWidth: '70%' }}>
         <div style={{ display: 'flex', flex: '1 1 auto' }}>
           <Card.Img src={movie.cover} style={{ maxWidth: '50%' }} />
