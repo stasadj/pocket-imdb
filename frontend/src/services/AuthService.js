@@ -43,6 +43,7 @@ class AuthService extends ApiService {
   };
 
   login = async (loginData) => {
+    this.destroySession();
     const { data } = await this.apiClient.post(ENDPOINTS.LOGIN, loginData);
     this.createSession(data);
     return data;
@@ -55,9 +56,8 @@ class AuthService extends ApiService {
   };
 
   logout = async () => {
-    const { data } = await this.apiClient.post(ENDPOINTS.LOGOUT);
     this.destroySession();
-    return { ok: true, data };
+    return { ok: true };
   };
 
   getToken = () => {
