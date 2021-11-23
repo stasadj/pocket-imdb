@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { getMovies } from '../store/actions/MovieActions';
-import { allMovies } from '../store/selectors/MovieSelectors';
+import { allMovies, moviePages } from '../store/selectors/MovieSelectors';
 import MovieCard from '../component/MovieCard';
 
 import Container from 'react-bootstrap/Container';
@@ -11,21 +11,20 @@ import MoviePagination from '../component/MoviePagination';
 const Home = () => {
   const dispatch = useDispatch();
   const movies = useSelector(allMovies);
+  const pages = useSelector(moviePages);
 
-  const [active, setActive] = useState(0);
+  const [active, setActive] = useState(1);
 
   useEffect(() => {
-    dispatch(getMovies());
+    dispatch(getMovies(active));
   }, []);
 
   const renderMovies = () => {
-    const moviesPage = movies.filter(
-      (movie, index) => index >= active * 10 && index < active * 10 + 10,
-    );
-    return moviesPage.map((movie) => <MovieCard key={movie.id} movie={movie} />);
+    return movies.map((movie) => <MovieCard key={movie.id} movie={movie} />);
   };
 
   const handleChangeActive = (page) => {
+    dispatch(getMovies(page));
     setActive(page);
   };
 
@@ -37,7 +36,7 @@ const Home = () => {
       <Container className="offset-5 col-4">
         <MoviePagination
           active={active}
-          pages={Math.ceil(movies.length / 10)}
+          pages={Math.ceil(pages / 10)}
           onClick={handleChangeActive}
         />
       </Container>
