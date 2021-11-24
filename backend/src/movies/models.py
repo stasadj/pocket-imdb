@@ -31,8 +31,10 @@ class Movie(models.Model):
     def get_queryset(cls, request):
         queryset = cls.objects.all()
         title = request.query_params.get('title')
+        genre = request.query_params.get('genre')
         if title is not None:
-            queryset = queryset.filter(title__icontains=title)
+            queryset = queryset.filter(
+                title__icontains=title, genre__icontains=genre)
         return queryset
 
     @classmethod
