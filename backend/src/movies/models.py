@@ -23,7 +23,3 @@ class Movie(models.Model):
         choices=GENRE_CHOICES,
         blank=True
     )
-
-    @classmethod
-    def list(cls, request):
-        return cls.objects.all()
