@@ -5,8 +5,8 @@ const ENDPOINTS = {
 };
 
 class MovieService extends ApiService {
-  getMovies = () => {
-    return this.apiClient.get(ENDPOINTS.MOVIES);
+  getMovies = (page) => {
+    return this.apiClient.get(`${ENDPOINTS.MOVIES}?page=${page}`);
   };
 }
 
