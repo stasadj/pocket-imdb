@@ -22,3 +22,13 @@ export function* movieGet({ payload }) {
     console.log({ error }); /*eslint-disable-line*/
   }
 }
+
+export function* moviePatch({ payload }) {
+  try {
+    const { data } = yield call(movieService.patchMovie, payload);
+
+    yield put(setMovie(data));
+  } catch (error) {
+    console.log({ error }); /*eslint-disable-line*/
+  }
+}
