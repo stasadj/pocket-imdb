@@ -1,9 +1,10 @@
+from rest_framework.decorators import api_view, permission_classes
 from rest_framework.generics import ListAPIView, RetrieveUpdateAPIView
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.response import Response
 from .serializers import MovieSerializer
-from .models import Movie
+from .models import Movie, GENRE_CHOICES
 
 
 class MovieListAPIView(ListAPIView):
@@ -22,3 +23,9 @@ class MovieRetrieveUpdateAPIView(RetrieveUpdateAPIView):
 
     def partial_update(self, request, pk):
         return Response(MovieSerializer(Movie.increment_views(pk)).data)
+
+
+@api_view(http_method_names=['GET'])
+@permission_classes([IsAuthenticated, ])
+def get_genres(request):
+    return Response([genre[1] for genre in GENRE_CHOICES])
