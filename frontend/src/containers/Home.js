@@ -28,7 +28,7 @@ const Home = () => {
   const getOptions = () => {
     const defaultOption = [
       <option key="Any" value="">
-        Any
+        Any genre
       </option>,
     ];
     return defaultOption.concat(
