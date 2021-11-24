@@ -14,6 +14,10 @@ class MovieService extends ApiService {
   getMovie = (id) => {
     return this.apiClient.get(`${ENDPOINTS.MOVIES}/${id}`);
   };
+
+  patchMovie = (id) => {
+    return this.apiClient.patch(`${ENDPOINTS.MOVIES}/${id}`, {});
+  };
 }
 
 export const movieService = new MovieService();
