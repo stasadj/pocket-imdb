@@ -1,8 +1,9 @@
 import { GET_MOVIES, SET_MOVIES } from './ActionTypes';
 
-export const getMovies = () => {
+export const getMovies = (payload) => {
   return {
     type: GET_MOVIES,
+    payload,
   };
 };
 
