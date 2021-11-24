@@ -6,10 +6,12 @@ from .models import Movie
 
 
 class MovieListAPIView(ListAPIView):
-    queryset = Movie.objects.all()
     permission_classes = (IsAuthenticated,)
     pagination_class = PageNumberPagination
     serializer_class = MovieSerializer
+
+    def get_queryset(self):
+        return Movie.get_queryset(self.request)
 
 
 class MovieRetrieveAPIView(RetrieveAPIView):

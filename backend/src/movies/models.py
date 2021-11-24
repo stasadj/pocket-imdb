@@ -23,3 +23,11 @@ class Movie(models.Model):
         choices=GENRE_CHOICES,
         blank=True
     )
+
+    @classmethod
+    def get_queryset(cls, request):
+        queryset = cls.objects.all()
+        title = request.query_params.get('title')
+        if title is not None:
+            queryset = queryset.filter(title__icontains=title)
+        return queryset
