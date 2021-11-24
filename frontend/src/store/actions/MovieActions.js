@@ -1,4 +1,12 @@
-import { GET_MOVIES, SET_MOVIES, GET_MOVIE, SET_MOVIE, INCREMENT_VIEWS } from './ActionTypes';
+import {
+  GET_MOVIES,
+  SET_MOVIES,
+  GET_MOVIE,
+  SET_MOVIE,
+  INCREMENT_VIEWS,
+  GET_GENRES,
+  SET_GENRES,
+} from './ActionTypes';
 
 export const getMovies = (payload) => {
   return {
@@ -31,6 +39,19 @@ export const setMovie = (payload) => {
 export const incrementViews = (payload) => {
   return {
     type: INCREMENT_VIEWS,
+    payload,
+  };
+};
+
+export const getGenres = () => {
+  return {
+    type: GET_GENRES,
+  };
+};
+
+export const setGenres = (payload) => {
+  return {
+    type: SET_GENRES,
     payload,
   };
 };
