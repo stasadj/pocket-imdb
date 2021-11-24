@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 
-import { getMovie } from '../store/actions/MovieActions';
+import { incrementViews } from '../store/actions/MovieActions';
 import { currentMovie } from '../store/selectors/MovieSelectors';
 
 import Container from 'react-bootstrap/Container';
@@ -12,6 +12,7 @@ import ListGroupItem from 'react-bootstrap/ListGroupItem';
 
 import { GoCommentDiscussion } from 'react-icons/go';
 import { FcLike, FcDislike } from 'react-icons/fc';
+import { IoEyeSharp } from 'react-icons/io5';
 
 const MoviePage = () => {
   const dispatch = useDispatch();
@@ -19,7 +20,7 @@ const MoviePage = () => {
   const movie = useSelector(currentMovie);
 
   useEffect(() => {
-    dispatch(getMovie(params.id));
+    dispatch(incrementViews(params.id));
   }, []);
   return (
     <Container className="offset-2 col-11" style={{ marginTop: '90px' }}>
@@ -36,6 +37,9 @@ const MoviePage = () => {
               <FcDislike />
               <small>6</small>
             </Card.Title>
+            <small className="text-muted">
+              {movie.views} <IoEyeSharp />
+            </small>
             <Card.Footer className="mt-5" style={{ border: '1px solid lightgrey' }}>
               <small className="text-muted">
                 Comments <GoCommentDiscussion />
