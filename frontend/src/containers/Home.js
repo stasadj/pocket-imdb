@@ -1,25 +1,46 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { getMovies } from '../store/actions/MovieActions';
-import { allMovies, moviePages } from '../store/selectors/MovieSelectors';
+import { getGenres, getMovies } from '../store/actions/MovieActions';
+import { allMovies, movieGenres, moviePages } from '../store/selectors/MovieSelectors';
 import MovieCard from '../component/MovieCard';
 
 import Container from 'react-bootstrap/Container';
 import MoviePagination from '../component/MoviePagination';
 import Form from 'react-bootstrap/Form';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 
 const Home = () => {
   const dispatch = useDispatch();
   const movies = useSelector(allMovies);
+  const genres = useSelector(movieGenres);
   const pages = useSelector(moviePages);
 
-  const [queryParams, setQueryParams] = useState({ active: 1, title: '' });
+  const [queryParams, setQueryParams] = useState({ active: 1, title: '', genre: '' });
   const [timer, setTimer] = useState(null);
 
   useEffect(() => {
     dispatch(getMovies(queryParams));
+    dispatch(getGenres());
   }, []);
+
+  const getOptions = () => {
+    const defaultOption = [
+      <option key="Any" value="">
+        Any genre
+      </option>,
+    ];
+    return defaultOption.concat(
+      genres.map((genre) => {
+        return (
+          <option key={genre} value={genre}>
+            {genre}
+          </option>
+        );
+      }),
+    );
+  };
 
   const renderMovies = () => {
     return movies.map((movie) => <MovieCard key={movie.id} movie={movie} />);
@@ -31,7 +52,7 @@ const Home = () => {
   };
 
   const handleChangeTitle = (event) => {
-    const params = { active: 1, title: event.target.value };
+    const params = { ...queryParams, active: 1, title: event.target.value };
     clearTimeout(timer);
     setTimer(
       setTimeout(() => {
@@ -41,17 +62,29 @@ const Home = () => {
     setQueryParams(params);
   };
 
+  const handleChangeGenre = (event) => {
+    dispatch(getMovies({ ...queryParams, active: 1, genre: event.target.value }));
+    setQueryParams((prev) => ({ ...prev, active: 1, genre: event.target.value }));
+  };
+
   return (
     <div>
-      <Container className="offset-4 col-4 mb-4 mt-4">
-        <Form.Control
-          className="shadow-none"
-          type="text"
-          placeholder="Search by movie title"
-          value={queryParams.title}
-          onChange={handleChangeTitle}
-        />
-      </Container>
+      <Row className="mt-4 mb-4 offset-3 g-2">
+        <Col md={5}>
+          <Form.Control
+            className="shadow-none"
+            type="text"
+            placeholder="Search by movie title"
+            value={queryParams.title}
+            onChange={handleChangeTitle}
+          />
+        </Col>
+        <Col md={3}>
+          <Form.Select className="shadow-none" onChange={handleChangeGenre}>
+            {getOptions()}
+          </Form.Select>
+        </Col>
+      </Row>
       <Container className="row" style={{ marginLeft: '55px' }}>
         {renderMovies()}
       </Container>

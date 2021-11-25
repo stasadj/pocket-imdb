@@ -2,12 +2,13 @@ import ApiService from './ApiService';
 
 const ENDPOINTS = {
   MOVIES: '/api/movies',
+  GENRES: '/api/genres',
 };
 
 class MovieService extends ApiService {
   getMovies = (queryParams) => {
     return this.apiClient.get(
-      `${ENDPOINTS.MOVIES}?page=${queryParams.active}&title=${queryParams.title}`,
+      `${ENDPOINTS.MOVIES}?page=${queryParams.active}&title=${queryParams.title}&genre=${queryParams.genre}`,
     );
   };
 
@@ -17,6 +18,10 @@ class MovieService extends ApiService {
 
   patchMovie = (id) => {
     return this.apiClient.patch(`${ENDPOINTS.MOVIES}/${id}`, {});
+  };
+
+  getGenres = () => {
+    return this.apiClient.get(ENDPOINTS.GENRES);
   };
 }
 
