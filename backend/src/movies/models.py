@@ -71,14 +71,6 @@ class Movie(models.Model):
             movie.dislikes.add(user)
         return movie
 
-    @classmethod
-    def add_comment(cls, request, pk):
-        user = request.user
-        movie = cls.objects.get(id=pk)
-        content = json.loads(request.body)['content']
-        Comment.objects.create(user=user, movie=movie, content=content)
-        return movie
-
 
 class Comment(models.Model):
     content = models.CharField(max_length=500, blank=False)
@@ -86,3 +78,18 @@ class Comment(models.Model):
         User, related_name='comments', on_delete=models.CASCADE)
     movie = models.ForeignKey(
         Movie, related_name='comments', on_delete=models.CASCADE)
+
+    @classmethod
+    def get_queryset(cls, movie_id):
+        queryset = cls.objects.all()
+        if movie_id is not None:
+            queryset = queryset.filter(
+                movie__id=movie_id)
+        return queryset
+
+    @classmethod
+    def add_comment(cls, request, pk):
+        user = request.user
+        movie = Movie.objects.get(id=pk)
+        content = json.loads(request.body)['content']
+        return cls.objects.create(user=user, movie=movie, content=content)

@@ -1,5 +1,6 @@
-import React from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
@@ -10,7 +11,8 @@ import ListGroupItem from 'react-bootstrap/ListGroupItem';
 
 import { FaUserAstronaut } from 'react-icons/fa';
 
-import { postComment } from '../store/actions/MovieActions';
+import { getComments, postComment } from '../store/actions/MovieActions';
+import { movieComments } from '../store/selectors/MovieSelectors';
 
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
@@ -21,8 +23,16 @@ const validationSchema = Yup.object({
     .required('You can not post an empty comment'),
 });
 
-const CommentSection = ({ movieId, comments }) => {
+const CommentSection = () => {
   const dispatch = useDispatch();
+  const pathParams = useParams();
+  const comments = useSelector(movieComments);
+
+  const [params, setParams] = useState({ id: pathParams.id, limit: 0 });
+
+  useEffect(() => {
+    dispatch(getComments(params));
+  }, []);
 
   const formik = useFormik({
     initialValues: {
@@ -30,7 +40,7 @@ const CommentSection = ({ movieId, comments }) => {
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
-      dispatch(postComment({ id: movieId, content: values.content }));
+      dispatch(postComment({ id: params.id, content: values.content }));
       values.content = '';
     },
   });

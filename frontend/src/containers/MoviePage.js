@@ -62,7 +62,7 @@ const MoviePage = () => {
           </small>
         </Card.Footer>
       </Card>
-      <CommentSection movieId={movie.id} comments={movie.comments} />
+      <CommentSection />
     </Container>
   );
 };

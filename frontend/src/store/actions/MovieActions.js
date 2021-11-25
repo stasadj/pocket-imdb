@@ -5,11 +5,14 @@ import {
   SET_MOVIE,
   GET_GENRES,
   SET_GENRES,
+  GET_COMMENTS,
+  SET_COMMENTS,
   INCREMENT_VIEWS,
   LIKE,
   DISLIKE,
   UPDATE_MOVIE,
   POST_COMMENT,
+  ADD_COMMENT,
 } from './ActionTypes';
 
 export const getMovies = (payload) => {
@@ -53,6 +56,20 @@ export const setGenres = (payload) => {
   };
 };
 
+export const getComments = (payload) => {
+  return {
+    type: GET_COMMENTS,
+    payload,
+  };
+};
+
+export const setComments = (payload) => {
+  return {
+    type: SET_COMMENTS,
+    payload,
+  };
+};
+
 export const incrementViews = (payload) => {
   return {
     type: INCREMENT_VIEWS,
@@ -84,6 +101,13 @@ export const updateMovie = (payload) => {
 export const postComment = (payload) => {
   return {
     type: POST_COMMENT,
+    payload,
+  };
+};
+
+export const addComment = (payload) => {
+  return {
+    type: ADD_COMMENT,
     payload,
   };
 };

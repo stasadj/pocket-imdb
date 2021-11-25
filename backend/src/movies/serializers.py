@@ -16,12 +16,11 @@ class MovieSerializer(serializers.ModelSerializer):
     dislikes = serializers.SerializerMethodField()
     liked_by_user = serializers.SerializerMethodField()
     disliked_by_user = serializers.SerializerMethodField()
-    comments = CommentSerializer(many=True)
 
     class Meta:
         model = Movie
         fields = ['id', 'title', 'description', 'cover', 'genre', 'views',
-                  'likes', 'dislikes', 'liked_by_user', 'disliked_by_user', 'comments']
+                  'likes', 'dislikes', 'liked_by_user', 'disliked_by_user']
 
     def get_likes(self, obj):
         return obj.likes.count()
