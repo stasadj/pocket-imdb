@@ -1,15 +1,17 @@
 import { all, takeLatest } from 'redux-saga/effects';
 import {
   LOGIN,
+  LOGOUT,
   REGISTER,
   GET_MOVIES,
   GET_MOVIE,
-  INCREMENT_VIEWS,
-  LOGOUT,
   GET_GENRES,
+  INCREMENT_VIEWS,
+  LIKE,
+  DISLIKE,
 } from '../actions/ActionTypes';
 import { userLogin, userRegister, userLogout } from './AuthSagas';
-import { moviesGet, movieGet, moviePatch, genresGet } from './MovieSagas';
+import { moviesGet, movieGet, genresGet, movieView, movieLike, movieDislike } from './MovieSagas';
 
 export default function* rootSaga() {
   yield all([
@@ -18,7 +20,9 @@ export default function* rootSaga() {
     takeLatest(REGISTER, userRegister),
     takeLatest(GET_MOVIES, moviesGet),
     takeLatest(GET_MOVIE, movieGet),
-    takeLatest(INCREMENT_VIEWS, moviePatch),
     takeLatest(GET_GENRES, genresGet),
+    takeLatest(INCREMENT_VIEWS, movieView),
+    takeLatest(LIKE, movieLike),
+    takeLatest(DISLIKE, movieDislike),
   ]);
 }

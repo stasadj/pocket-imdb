@@ -3,9 +3,12 @@ import {
   SET_MOVIES,
   GET_MOVIE,
   SET_MOVIE,
-  INCREMENT_VIEWS,
   GET_GENRES,
   SET_GENRES,
+  INCREMENT_VIEWS,
+  LIKE,
+  DISLIKE,
+  UPDATE_MOVIE,
 } from './ActionTypes';
 
 export const getMovies = (payload) => {
@@ -36,13 +39,6 @@ export const setMovie = (payload) => {
   };
 };
 
-export const incrementViews = (payload) => {
-  return {
-    type: INCREMENT_VIEWS,
-    payload,
-  };
-};
-
 export const getGenres = () => {
   return {
     type: GET_GENRES,
@@ -52,6 +48,34 @@ export const getGenres = () => {
 export const setGenres = (payload) => {
   return {
     type: SET_GENRES,
+    payload,
+  };
+};
+
+export const incrementViews = (payload) => {
+  return {
+    type: INCREMENT_VIEWS,
+    payload,
+  };
+};
+
+export const likeMovie = (payload) => {
+  return {
+    type: LIKE,
+    payload,
+  };
+};
+
+export const dislikeMovie = (payload) => {
+  return {
+    type: DISLIKE,
+    payload,
+  };
+};
+
+export const updateMovie = (payload) => {
+  return {
+    type: UPDATE_MOVIE,
     payload,
   };
 };

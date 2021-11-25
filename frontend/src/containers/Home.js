@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { getGenres, getMovies } from '../store/actions/MovieActions';
+import { getGenres, getMovies, likeMovie, dislikeMovie } from '../store/actions/MovieActions';
 import { allMovies, movieGenres, moviePages } from '../store/selectors/MovieSelectors';
 import MovieCard from '../component/MovieCard';
 
@@ -43,7 +43,14 @@ const Home = () => {
   };
 
   const renderMovies = () => {
-    return movies.map((movie) => <MovieCard key={movie.id} movie={movie} />);
+    return movies.map((movie) => (
+      <MovieCard
+        key={movie.id}
+        movie={movie}
+        onLike={handleLikeMovie}
+        onDislike={handleDislikeMovie}
+      />
+    ));
   };
 
   const handleChangeActive = (page) => {
@@ -65,6 +72,14 @@ const Home = () => {
   const handleChangeGenre = (event) => {
     dispatch(getMovies({ ...queryParams, active: 1, genre: event.target.value }));
     setQueryParams((prev) => ({ ...prev, active: 1, genre: event.target.value }));
+  };
+
+  const handleLikeMovie = (id) => {
+    dispatch(likeMovie(id));
+  };
+
+  const handleDislikeMovie = (id) => {
+    dispatch(dislikeMovie(id));
   };
 
   return (
