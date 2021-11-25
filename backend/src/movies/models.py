@@ -1,4 +1,5 @@
 from django.db import models
+from src.users.models import User
 
 
 GENRE_CHOICES = [
@@ -26,6 +27,8 @@ class Movie(models.Model):
         blank=True
     )
     views = models.PositiveBigIntegerField(default=0)
+    likes = models.ManyToManyField(User, related_name='movies_liked')
+    dislikes = models.ManyToManyField(User, related_name='movies_disliked')
 
     @classmethod
     def get_queryset(cls, request):
