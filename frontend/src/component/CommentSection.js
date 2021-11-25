@@ -28,7 +28,7 @@ const CommentSection = () => {
   const pathParams = useParams();
   const comments = useSelector(movieComments);
 
-  const [params, setParams] = useState({ id: pathParams.id, limit: 0 });
+  const [params, setParams] = useState({ id: pathParams.id, limit: 5 });
 
   useEffect(() => {
     dispatch(getComments(params));
@@ -59,6 +59,12 @@ const CommentSection = () => {
       : [];
   };
 
+  const handleShowMore = () => {
+    const newParams = { ...params, limit: params.limit + 5 };
+    dispatch(getComments(newParams));
+    setParams(newParams);
+  };
+
   return (
     <Card style={{ maxWidth: '70%', marginBottom: '50px', border: '0px' }}>
       <ListGroup
@@ -67,6 +73,9 @@ const CommentSection = () => {
       >
         {renderComments()}
       </ListGroup>
+      <Button className="shadow-none" variant="secondary" onClick={handleShowMore}>
+        Show more
+      </Button>
       <Form onSubmit={formik.handleSubmit}>
         <Form.Control
           id="content"
@@ -79,7 +88,7 @@ const CommentSection = () => {
           value={formik.values.content}
           onChange={formik.handleChange}
         />
-        <Button variant="success" type="submit">
+        <Button className="shadow-none" variant="success" type="submit">
           Post
         </Button>
 
