@@ -64,3 +64,13 @@ export function* movieDislike({ payload }) {
     console.log({ error }); /*eslint-disable-line*/
   }
 }
+
+export function* movieComment({ payload }) {
+  try {
+    const { data } = yield call(movieService.postComment, payload);
+
+    yield put(setMovie(data));
+  } catch (error) {
+    console.log({ error }); /*eslint-disable-line*/
+  }
+}

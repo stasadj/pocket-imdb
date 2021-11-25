@@ -7,13 +7,12 @@ import { currentMovie } from '../store/selectors/MovieSelectors';
 
 import Container from 'react-bootstrap/Container';
 import Card from 'react-bootstrap/Card';
-import ListGroup from 'react-bootstrap/ListGroup';
-import ListGroupItem from 'react-bootstrap/ListGroupItem';
 import Button from 'react-bootstrap/Button';
 
 import { GoCommentDiscussion } from 'react-icons/go';
 import { IoEyeSharp } from 'react-icons/io5';
 import { GrLike, GrDislike } from 'react-icons/gr';
+import CommentSection from '../component/CommentSection';
 
 const MoviePage = () => {
   const dispatch = useDispatch();
@@ -53,19 +52,17 @@ const MoviePage = () => {
             <div className="text-muted mt-2">
               {movie.views} <IoEyeSharp />
             </div>
-            <Card.Footer className="mt-5" style={{ border: '1px solid lightgrey' }}>
-              <small className="text-muted">
-                Comments <GoCommentDiscussion />
-              </small>
-            </Card.Footer>
-            <Card>
-              <ListGroup className="list-group-flush" style={{ textAlign: 'left' }}>
-                <ListGroupItem>Cras justo odio</ListGroupItem>
-              </ListGroup>
-            </Card>
           </Card.Body>
         </div>
+        <Card.Footer>
+          <small className="text-muted">
+            <b>
+              Comments <GoCommentDiscussion />
+            </b>
+          </small>
+        </Card.Footer>
       </Card>
+      <CommentSection movieId={movie.id} comments={movie.comments} />
     </Container>
   );
 };
