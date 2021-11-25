@@ -16,12 +16,20 @@ class MovieService extends ApiService {
     return this.apiClient.get(`${ENDPOINTS.MOVIES}/${id}`);
   };
 
-  patchMovie = (id) => {
+  getGenres = () => {
+    return this.apiClient.get(ENDPOINTS.GENRES);
+  };
+
+  viewMovie = (id) => {
     return this.apiClient.patch(`${ENDPOINTS.MOVIES}/${id}`, {});
   };
 
-  getGenres = () => {
-    return this.apiClient.get(ENDPOINTS.GENRES);
+  likeMovie = (id) => {
+    return this.apiClient.patch(`${ENDPOINTS.MOVIES}/${id}/like`, {});
+  };
+
+  dislikeMovie = (id) => {
+    return this.apiClient.patch(`${ENDPOINTS.MOVIES}/${id}/dislike`, {});
   };
 }
 

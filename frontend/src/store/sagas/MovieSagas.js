@@ -1,7 +1,7 @@
 import { call, put } from 'redux-saga/effects';
 
 import { movieService } from '../../services/MovieService';
-import { setMovies, setMovie, setGenres } from '../actions/MovieActions';
+import { setMovies, setMovie, setGenres, updateMovie } from '../actions/MovieActions';
 
 export function* moviesGet({ payload }) {
   try {
@@ -23,9 +23,19 @@ export function* movieGet({ payload }) {
   }
 }
 
-export function* moviePatch({ payload }) {
+export function* genresGet() {
   try {
-    const { data } = yield call(movieService.patchMovie, payload);
+    const { data } = yield call(movieService.getGenres);
+
+    yield put(setGenres(data));
+  } catch (error) {
+    console.log({ error }); /*eslint-disable-line*/
+  }
+}
+
+export function* movieView({ payload }) {
+  try {
+    const { data } = yield call(movieService.viewMovie, payload);
 
     yield put(setMovie(data));
   } catch (error) {
@@ -33,11 +43,23 @@ export function* moviePatch({ payload }) {
   }
 }
 
-export function* genresGet() {
+export function* movieLike({ payload }) {
   try {
-    const { data } = yield call(movieService.getGenres);
+    const { data } = yield call(movieService.likeMovie, payload);
 
-    yield put(setGenres(data));
+    yield put(setMovie(data));
+    yield put(updateMovie(data));
+  } catch (error) {
+    console.log({ error }); /*eslint-disable-line*/
+  }
+}
+
+export function* movieDislike({ payload }) {
+  try {
+    const { data } = yield call(movieService.dislikeMovie, payload);
+
+    yield put(setMovie(data));
+    yield put(updateMovie(data));
   } catch (error) {
     console.log({ error }); /*eslint-disable-line*/
   }
