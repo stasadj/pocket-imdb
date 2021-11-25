@@ -46,3 +46,25 @@ class Movie(models.Model):
         movie.views += 1
         movie.save()
         return movie
+
+    @classmethod
+    def like_movie(cls, user, pk):
+        movie = cls.objects.get(id=pk)
+        if movie.likes.filter(id=user.id).exists():
+            movie.likes.remove(user)
+        else:
+            if movie.dislikes.filter(id=user.id).exists():
+                movie.dislikes.remove(user)
+            movie.likes.add(user)
+        return movie
+
+    @classmethod
+    def dislike_movie(cls, user, pk):
+        movie = cls.objects.get(id=pk)
+        if movie.dislikes.filter(id=user.id).exists():
+            movie.dislikes.remove(user)
+        else:
+            if movie.likes.filter(id=user.id).exists():
+                movie.likes.remove(user)
+            movie.dislikes.add(user)
+        return movie

@@ -8,5 +8,9 @@ urlpatterns = [
     path('api/auth/register', auths_views.register),
     path('api/movies', movies_views.MovieListAPIView.as_view()),
     path('api/movies/<int:pk>', movies_views.MovieRetrieveUpdateAPIView.as_view()),
+    path('api/movies/<int:pk>/like',
+         movies_views.like_movie),
+    path('api/movies/<int:pk>/dislike',
+         movies_views.dislike_movie),
     path('api/genres', movies_views.get_genres),
 ]
