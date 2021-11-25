@@ -12,5 +12,7 @@ urlpatterns = [
          movies_views.like_movie),
     path('api/movies/<int:pk>/dislike',
          movies_views.dislike_movie),
+    path('api/movies/<int:pk>/comment',
+         movies_views.add_comment),
     path('api/genres', movies_views.get_genres),
 ]

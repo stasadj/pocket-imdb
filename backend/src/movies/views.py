@@ -41,3 +41,9 @@ def like_movie(request, pk):
 @permission_classes([IsAuthenticated, ])
 def dislike_movie(request, pk):
     return Response(MovieSerializer(Movie.dislike_movie(request.user, pk), context={'request': request}).data)
+
+
+@api_view(http_method_names=['POST'])
+@permission_classes([IsAuthenticated, ])
+def add_comment(request, pk):
+    return Response(MovieSerializer(Movie.add_comment(request, pk), context={'request': request}).data)

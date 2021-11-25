@@ -1,6 +1,8 @@
 from django.db import models
 from src.users.models import User
 
+import json
+
 
 GENRE_CHOICES = [
     (1, 'Fantasy'),
@@ -67,6 +69,14 @@ class Movie(models.Model):
             if movie.likes.filter(id=user.id).exists():
                 movie.likes.remove(user)
             movie.dislikes.add(user)
+        return movie
+
+    @classmethod
+    def add_comment(cls, request, pk):
+        user = request.user
+        movie = cls.objects.get(id=pk)
+        content = json.loads(request.body)['content']
+        Comment.objects.create(user=user, movie=movie, content=content)
         return movie
 
 
