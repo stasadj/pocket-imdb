@@ -1,10 +1,18 @@
-import { SET_MOVIES, SET_MOVIE, SET_GENRES, UPDATE_MOVIE } from '../actions/ActionTypes';
+import {
+  SET_MOVIES,
+  SET_MOVIE,
+  SET_GENRES,
+  SET_COMMENTS,
+  UPDATE_MOVIE,
+  ADD_COMMENT,
+} from '../actions/ActionTypes';
 
 const initialState = {
   all: [],
   count: 0,
   current: {},
   genres: [],
+  comments: [],
 };
 const movieReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -14,10 +22,17 @@ const movieReducer = (state = initialState, action) => {
       return { ...state, current: action.payload };
     case SET_GENRES:
       return { ...state, genres: action.payload };
+    case SET_COMMENTS:
+      return { ...state, comments: action.payload };
     case UPDATE_MOVIE:
       return {
         ...state,
         all: state.all.map((movie) => (movie.id === action.payload.id ? action.payload : movie)),
+      };
+    case ADD_COMMENT:
+      return {
+        ...state,
+        comments: state.comments.concat([action.payload]),
       };
     default:
       return state;

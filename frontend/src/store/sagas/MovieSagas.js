@@ -1,7 +1,14 @@
 import { call, put } from 'redux-saga/effects';
 
 import { movieService } from '../../services/MovieService';
-import { setMovies, setMovie, setGenres, updateMovie } from '../actions/MovieActions';
+import {
+  setMovies,
+  setMovie,
+  setGenres,
+  setComments,
+  updateMovie,
+  addComment,
+} from '../actions/MovieActions';
 
 export function* moviesGet({ payload }) {
   try {
@@ -28,6 +35,16 @@ export function* genresGet() {
     const { data } = yield call(movieService.getGenres);
 
     yield put(setGenres(data));
+  } catch (error) {
+    console.log({ error }); /*eslint-disable-line*/
+  }
+}
+
+export function* commentsGet({ payload }) {
+  try {
+    const { data } = yield call(movieService.getComments, payload);
+
+    yield put(setComments(data.results));
   } catch (error) {
     console.log({ error }); /*eslint-disable-line*/
   }
@@ -69,7 +86,7 @@ export function* movieComment({ payload }) {
   try {
     const { data } = yield call(movieService.postComment, payload);
 
-    yield put(setMovie(data));
+    yield put(addComment(data));
   } catch (error) {
     console.log({ error }); /*eslint-disable-line*/
   }
