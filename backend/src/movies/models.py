@@ -68,3 +68,11 @@ class Movie(models.Model):
                 movie.likes.remove(user)
             movie.dislikes.add(user)
         return movie
+
+
+class Comment(models.Model):
+    content = models.CharField(max_length=500, blank=False)
+    user = models.ForeignKey(
+        User, related_name='comments', on_delete=models.CASCADE)
+    movie = models.ForeignKey(
+        Movie, related_name='comments', on_delete=models.CASCADE)

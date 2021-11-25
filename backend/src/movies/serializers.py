@@ -1,6 +1,14 @@
 from rest_framework import serializers
-from rest_framework.fields import CurrentUserDefault
-from .models import Movie
+from .models import Movie, Comment
+
+
+class CommentSerializer(serializers.ModelSerializer):
+    username = serializers.SlugRelatedField(source='user', read_only=True,
+                                            slug_field='username')
+
+    class Meta:
+        model = Comment
+        fields = ['id', 'content', 'username']
 
 
 class MovieSerializer(serializers.ModelSerializer):
@@ -8,11 +16,12 @@ class MovieSerializer(serializers.ModelSerializer):
     dislikes = serializers.SerializerMethodField()
     liked_by_user = serializers.SerializerMethodField()
     disliked_by_user = serializers.SerializerMethodField()
+    comments = CommentSerializer(many=True)
 
     class Meta:
         model = Movie
         fields = ['id', 'title', 'description', 'cover', 'genre', 'views',
-                  'likes', 'dislikes', 'liked_by_user', 'disliked_by_user']
+                  'likes', 'dislikes', 'liked_by_user', 'disliked_by_user', 'comments']
 
     def get_likes(self, obj):
         return obj.likes.count()
