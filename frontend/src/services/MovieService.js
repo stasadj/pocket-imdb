@@ -31,6 +31,12 @@ class MovieService extends ApiService {
   dislikeMovie = (id) => {
     return this.apiClient.patch(`${ENDPOINTS.MOVIES}/${id}/dislike`, {});
   };
+
+  postComment = (payload) => {
+    return this.apiClient.post(`${ENDPOINTS.MOVIES}/${payload.id}/comment`, {
+      content: payload.content,
+    });
+  };
 }
 
 export const movieService = new MovieService();

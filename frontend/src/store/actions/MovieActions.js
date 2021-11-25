@@ -9,6 +9,7 @@ import {
   LIKE,
   DISLIKE,
   UPDATE_MOVIE,
+  POST_COMMENT,
 } from './ActionTypes';
 
 export const getMovies = (payload) => {
@@ -76,6 +77,13 @@ export const dislikeMovie = (payload) => {
 export const updateMovie = (payload) => {
   return {
     type: UPDATE_MOVIE,
+    payload,
+  };
+};
+
+export const postComment = (payload) => {
+  return {
+    type: POST_COMMENT,
     payload,
   };
 };

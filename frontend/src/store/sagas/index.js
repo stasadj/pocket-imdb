@@ -9,9 +9,18 @@ import {
   INCREMENT_VIEWS,
   LIKE,
   DISLIKE,
+  POST_COMMENT,
 } from '../actions/ActionTypes';
 import { userLogin, userRegister, userLogout } from './AuthSagas';
-import { moviesGet, movieGet, genresGet, movieView, movieLike, movieDislike } from './MovieSagas';
+import {
+  moviesGet,
+  movieGet,
+  genresGet,
+  movieView,
+  movieLike,
+  movieDislike,
+  movieComment,
+} from './MovieSagas';
 
 export default function* rootSaga() {
   yield all([
@@ -24,5 +33,6 @@ export default function* rootSaga() {
     takeLatest(INCREMENT_VIEWS, movieView),
     takeLatest(LIKE, movieLike),
     takeLatest(DISLIKE, movieDislike),
+    takeLatest(POST_COMMENT, movieComment),
   ]);
 }
