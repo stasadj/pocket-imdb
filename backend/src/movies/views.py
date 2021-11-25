@@ -22,10 +22,22 @@ class MovieRetrieveUpdateAPIView(RetrieveUpdateAPIView):
     serializer_class = MovieSerializer
 
     def partial_update(self, request, pk):
-        return Response(MovieSerializer(Movie.increment_views(pk)).data)
+        return Response(MovieSerializer(Movie.increment_views(pk), context={'request': request}).data)
 
 
 @api_view(http_method_names=['GET'])
 @permission_classes([IsAuthenticated, ])
 def get_genres(request):
     return Response([genre[1] for genre in GENRE_CHOICES])
+
+
+@api_view(http_method_names=['PATCH'])
+@permission_classes([IsAuthenticated, ])
+def like_movie(request, pk):
+    return Response(MovieSerializer(Movie.like_movie(request.user, pk), context={'request': request}).data)
+
+
+@api_view(http_method_names=['PATCH'])
+@permission_classes([IsAuthenticated, ])
+def dislike_movie(request, pk):
+    return Response(MovieSerializer(Movie.dislike_movie(request.user, pk), context={'request': request}).data)

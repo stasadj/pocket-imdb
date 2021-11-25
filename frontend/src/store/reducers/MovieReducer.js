@@ -1,4 +1,4 @@
-import { SET_MOVIES, SET_MOVIE, SET_GENRES } from '../actions/ActionTypes';
+import { SET_MOVIES, SET_MOVIE, SET_GENRES, UPDATE_MOVIE } from '../actions/ActionTypes';
 
 const initialState = {
   all: [],
@@ -14,6 +14,11 @@ const movieReducer = (state = initialState, action) => {
       return { ...state, current: action.payload };
     case SET_GENRES:
       return { ...state, genres: action.payload };
+    case UPDATE_MOVIE:
+      return {
+        ...state,
+        all: state.all.map((movie) => (movie.id === action.payload.id ? action.payload : movie)),
+      };
     default:
       return state;
   }
