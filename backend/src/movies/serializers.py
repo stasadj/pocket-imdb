@@ -1,6 +1,14 @@
 from rest_framework import serializers
-from rest_framework.fields import CurrentUserDefault
-from .models import Movie
+from .models import Movie, Comment
+
+
+class CommentSerializer(serializers.ModelSerializer):
+    username = serializers.SlugRelatedField(source='user', read_only=True,
+                                            slug_field='username')
+
+    class Meta:
+        model = Comment
+        fields = ['id', 'content', 'username']
 
 
 class MovieSerializer(serializers.ModelSerializer):

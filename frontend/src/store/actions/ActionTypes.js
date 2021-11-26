@@ -18,3 +18,8 @@ export const DISLIKE = 'DISLIKE';
 
 export const GET_GENRES = 'GET_GENRES';
 export const SET_GENRES = 'SET_GENRES';
+
+export const GET_COMMENTS = 'GET_COMMENTS';
+export const SET_COMMENTS = 'SET_COMMENTS';
+export const POST_COMMENT = 'POST_COMMENT';
+export const ADD_COMMENT = 'ADD_COMMENT';
