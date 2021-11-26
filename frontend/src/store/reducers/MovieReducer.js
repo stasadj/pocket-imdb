@@ -3,6 +3,7 @@ import {
   SET_MOVIE,
   SET_GENRES,
   SET_COMMENTS,
+  SET_POPULAR,
   UPDATE_MOVIE,
   ADD_COMMENT,
 } from '../actions/ActionTypes';
@@ -13,6 +14,7 @@ const initialState = {
   current: {},
   genres: [],
   comments: [],
+  popular: [],
 };
 const movieReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -24,6 +26,8 @@ const movieReducer = (state = initialState, action) => {
       return { ...state, genres: action.payload };
     case SET_COMMENTS:
       return { ...state, comments: action.payload };
+    case SET_POPULAR:
+      return { ...state, popular: action.payload };
     case UPDATE_MOVIE:
       return {
         ...state,

@@ -43,6 +43,11 @@ class Movie(models.Model):
         return queryset
 
     @classmethod
+    def popular(cls):
+        return cls.objects.all().annotate(likes_count=models.Count(
+            'likes')).order_by('-likes_count')[:10]
+
+    @classmethod
     def increment_views(cls, pk):
         movie = cls.objects.get(id=pk)
         movie.views += 1
