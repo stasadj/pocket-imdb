@@ -86,7 +86,7 @@ const Home = () => {
   return (
     <div>
       <Row>
-        <Col md={10} style={{ border: '1px solid lightgrey' }}>
+        <Col md={9} style={{ border: '1px solid lightgrey' }}>
           <Row className="mt-4 mb-4 offset-3 g-2">
             <Col md={5}>
               <Form.Control
@@ -113,7 +113,7 @@ const Home = () => {
           </Col>
         </Col>
         <Col
-          md={2}
+          md={3}
           style={{ borderTop: '1px solid lightgrey', borderBottom: '1px solid lightgrey' }}
         >
           <PopularMovies />

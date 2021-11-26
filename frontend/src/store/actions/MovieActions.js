@@ -9,6 +9,8 @@ import {
   SET_COMMENTS,
   GET_POPULAR,
   SET_POPULAR,
+  GET_RELATED,
+  SET_RELATED,
   INCREMENT_VIEWS,
   LIKE,
   DISLIKE,
@@ -81,6 +83,20 @@ export const getPopular = () => {
 export const setPopular = (payload) => {
   return {
     type: SET_POPULAR,
+    payload,
+  };
+};
+
+export const getRelated = (payload) => {
+  return {
+    type: GET_RELATED,
+    payload,
+  };
+};
+
+export const setRelated = (payload) => {
+  return {
+    type: SET_RELATED,
     payload,
   };
 };

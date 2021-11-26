@@ -22,7 +22,7 @@ const PopularMovies = () => {
   const renderPopular = () => {
     return popular.map((movie, index) => (
       <NavLink className="link-light" to={`${MOVIES}/${movie.id}`}>
-        <ListGroupItem className="text-muted">
+        <ListGroupItem className="text-muted" style={{ textAlign: 'left' }}>
           <h6>
             {index + 1}. {movie.title}
           </h6>
@@ -32,8 +32,8 @@ const PopularMovies = () => {
   };
 
   return (
-    <div style={{ marginTop: '90px', textAlign: 'left' }}>
-      <h5 className="mt-2 offset-2"> Popular movies </h5>
+    <div style={{ marginTop: '90px' }}>
+      <h5 className="mt-2"> Popular movies </h5>
       <ListGroup>{renderPopular()}</ListGroup>
     </div>
   );
