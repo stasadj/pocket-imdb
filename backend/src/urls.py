@@ -16,5 +16,6 @@ urlpatterns = [
          movies_views.add_comment),
     path('api/movies/<int:movie_id>/comments',
          movies_views.CommentListAPIView.as_view()),
+    path('api/movies/popular', movies_views.polular),
     path('api/genres', movies_views.get_genres),
 ]

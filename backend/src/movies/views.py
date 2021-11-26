@@ -36,6 +36,12 @@ class CommentListAPIView(ListAPIView):
 
 @api_view(http_method_names=['GET'])
 @permission_classes([IsAuthenticated, ])
+def polular(request):
+    return Response(MovieSerializer(Movie.popular(), context={'request': request}, many=True).data)
+
+
+@api_view(http_method_names=['GET'])
+@permission_classes([IsAuthenticated, ])
 def get_genres(request):
     return Response([genre[1] for genre in GENRE_CHOICES])
 
