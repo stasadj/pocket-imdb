@@ -5,11 +5,12 @@ import { getGenres, getMovies, likeMovie, dislikeMovie } from '../store/actions/
 import { allMovies, movieGenres, moviePages } from '../store/selectors/MovieSelectors';
 import MovieCard from '../component/MovieCard';
 
-import Container from 'react-bootstrap/Container';
 import MoviePagination from '../component/MoviePagination';
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+
+import PopularMovies from '../component/PopularMovies';
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -84,32 +85,40 @@ const Home = () => {
 
   return (
     <div>
-      <Row className="mt-4 mb-4 offset-3 g-2">
-        <Col md={5}>
-          <Form.Control
-            className="shadow-none"
-            type="text"
-            placeholder="Search by movie title"
-            value={queryParams.title}
-            onChange={handleChangeTitle}
-          />
+      <Row>
+        <Col md={10} style={{ border: '1px solid lightgrey' }}>
+          <Row className="mt-4 mb-4 offset-3 g-2">
+            <Col md={5}>
+              <Form.Control
+                className="shadow-none"
+                type="text"
+                placeholder="Search by movie title"
+                value={queryParams.title}
+                onChange={handleChangeTitle}
+              />
+            </Col>
+            <Col md={3}>
+              <Form.Select className="shadow-none" onChange={handleChangeGenre}>
+                {getOptions()}
+              </Form.Select>
+            </Col>
+          </Row>
+          <Row>{renderMovies()}</Row>
+          <Col className="offset-5" md={3}>
+            <MoviePagination
+              active={queryParams.active}
+              pages={Math.ceil(pages / 10)}
+              onClick={handleChangeActive}
+            />
+          </Col>
         </Col>
-        <Col md={3}>
-          <Form.Select className="shadow-none" onChange={handleChangeGenre}>
-            {getOptions()}
-          </Form.Select>
+        <Col
+          md={2}
+          style={{ borderTop: '1px solid lightgrey', borderBottom: '1px solid lightgrey' }}
+        >
+          <PopularMovies />
         </Col>
       </Row>
-      <Container className="row" style={{ marginLeft: '55px' }}>
-        {renderMovies()}
-      </Container>
-      <Container className="offset-5 col-2">
-        <MoviePagination
-          active={queryParams.active}
-          pages={Math.ceil(pages / 10)}
-          onClick={handleChangeActive}
-        />
-      </Container>
     </div>
   );
 };

@@ -7,6 +7,8 @@ import {
   SET_GENRES,
   GET_COMMENTS,
   SET_COMMENTS,
+  GET_POPULAR,
+  SET_POPULAR,
   INCREMENT_VIEWS,
   LIKE,
   DISLIKE,
@@ -66,6 +68,19 @@ export const getComments = (payload) => {
 export const setComments = (payload) => {
   return {
     type: SET_COMMENTS,
+    payload,
+  };
+};
+
+export const getPopular = () => {
+  return {
+    type: GET_POPULAR,
+  };
+};
+
+export const setPopular = (payload) => {
+  return {
+    type: SET_POPULAR,
     payload,
   };
 };

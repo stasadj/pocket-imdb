@@ -6,6 +6,7 @@ import {
   setMovie,
   setGenres,
   setComments,
+  setPopular,
   updateMovie,
   addComment,
 } from '../actions/MovieActions';
@@ -35,6 +36,16 @@ export function* genresGet() {
     const { data } = yield call(movieService.getGenres);
 
     yield put(setGenres(data));
+  } catch (error) {
+    console.log({ error }); /*eslint-disable-line*/
+  }
+}
+
+export function* popularGet() {
+  try {
+    const { data } = yield call(movieService.getPopular);
+
+    yield put(setPopular(data));
   } catch (error) {
     console.log({ error }); /*eslint-disable-line*/
   }
