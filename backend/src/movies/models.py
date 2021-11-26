@@ -48,6 +48,11 @@ class Movie(models.Model):
             'likes')).order_by('-likes_count')[:10]
 
     @classmethod
+    def related(cls, movie_id):
+        movie = cls.objects.get(id=movie_id)
+        return cls.objects.filter(genre=movie.genre).exclude(id=movie_id)[:10]
+
+    @classmethod
     def increment_views(cls, pk):
         movie = cls.objects.get(id=pk)
         movie.views += 1
