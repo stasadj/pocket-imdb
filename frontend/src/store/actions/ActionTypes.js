@@ -26,3 +26,6 @@ export const ADD_COMMENT = 'ADD_COMMENT';
 
 export const GET_POPULAR = 'GET_POPULAR';
 export const SET_POPULAR = 'SET_POPULAR';
+
+export const GET_RELATED = 'GET_RELATED';
+export const SET_RELATED = 'SET_RELATED';
