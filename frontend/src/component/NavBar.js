@@ -36,9 +36,6 @@ const NavBar = () => {
             <NavLink className="nav-link" to={HOME}>
               {t('Home')}
             </NavLink>
-            <NavLink className="nav-link" to={HOME}>
-              Popular
-            </NavLink>
             <NavLink className="nav-link" to={ABOUT}>
               {t('About app')}
             </NavLink>

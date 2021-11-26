@@ -11,3 +11,5 @@ export const moviePages = createSelector(movieStateSelector, (state) => state.co
 export const movieGenres = createSelector(movieStateSelector, (state) => state.genres);
 
 export const movieComments = createSelector(movieStateSelector, (state) => state.comments);
+
+export const popularMovies = createSelector(movieStateSelector, (state) => state.popular);

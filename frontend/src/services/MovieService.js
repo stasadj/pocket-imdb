@@ -20,6 +20,10 @@ class MovieService extends ApiService {
     return this.apiClient.get(ENDPOINTS.GENRES);
   };
 
+  getPopular = () => {
+    return this.apiClient.get(`${ENDPOINTS.MOVIES}/popular`);
+  };
+
   getComments = (params) => {
     return this.apiClient.get(`${ENDPOINTS.MOVIES}/${params.id}/comments?limit=${params.limit}`);
   };
