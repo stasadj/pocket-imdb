@@ -36,8 +36,14 @@ class CommentListAPIView(ListAPIView):
 
 @api_view(http_method_names=['GET'])
 @permission_classes([IsAuthenticated, ])
-def polular(request):
+def popular(request):
     return Response(MovieSerializer(Movie.popular(), context={'request': request}, many=True).data)
+
+
+@api_view(http_method_names=['GET'])
+@permission_classes([IsAuthenticated, ])
+def related(request, movie_id):
+    return Response(MovieSerializer(Movie.related(movie_id), context={'request': request}, many=True).data)
 
 
 @api_view(http_method_names=['GET'])

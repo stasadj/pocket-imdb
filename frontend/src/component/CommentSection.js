@@ -28,11 +28,13 @@ const CommentSection = () => {
   const pathParams = useParams();
   const comments = useSelector(movieComments);
 
-  const [params, setParams] = useState({ id: pathParams.id, limit: 5 });
+  const [params, setParams] = useState({});
 
   useEffect(() => {
-    dispatch(getComments(params));
-  }, []);
+    const newParams = { id: pathParams.id, limit: 5 };
+    dispatch(getComments(newParams));
+    setParams(newParams);
+  }, [pathParams.id]);
 
   const formik = useFormik({
     initialValues: {
@@ -66,7 +68,7 @@ const CommentSection = () => {
   };
 
   return (
-    <Card style={{ maxWidth: '70%', marginBottom: '50px', border: '0px' }}>
+    <Card style={{ maxWidth: '100%', marginBottom: '50px', border: '0px' }}>
       <ListGroup
         className="list-group-flush"
         style={{ border: '1px solid lightgrey', textAlign: 'left' }}
