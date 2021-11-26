@@ -9,3 +9,5 @@ export const currentMovie = createSelector(movieStateSelector, (state) => state.
 export const moviePages = createSelector(movieStateSelector, (state) => state.count);
 
 export const movieGenres = createSelector(movieStateSelector, (state) => state.genres);
+
+export const movieComments = createSelector(movieStateSelector, (state) => state.comments);
