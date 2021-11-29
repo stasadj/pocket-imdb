@@ -25,8 +25,7 @@ const CreateOMDB = () => {
       fetch(`http://www.omdbapi.com/?apikey=5f0252f3&t=${values.title}`)
         .then((response) => response.json())
         .then((data) => {
-          console.log(data);
-          !data['Response']
+          !data['Error']
             ? dispatch(
                 createMovie({
                   title: data['Title'],
