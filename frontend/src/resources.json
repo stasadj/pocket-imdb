@@ -18,7 +18,8 @@
       "Enter email address": "Enter email address",
       "Log in to see movies": "Log in to see movies",
       "Enter password": "Enter password",
-      "Create movie": "Create movie"
+      "Create movie": "Create movie",
+      "Watch List": "Watch List"
     }
   },
   "srb": {
@@ -40,7 +41,8 @@
       "Enter email address": "Unesite email adresu",
       "Log in to see movies": "Prijavite se da biste pregledali filmove",
       "Enter password": "Unesite lozinku",
-      "Create movie": "Kreiraj film"
+      "Create movie": "Kreiraj film",
+      "Watch list": "Pogledati kasnije"
     }
   }
 }

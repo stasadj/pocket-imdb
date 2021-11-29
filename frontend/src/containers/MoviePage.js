@@ -2,17 +2,25 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 
-import { incrementViews, likeMovie, dislikeMovie } from '../store/actions/MovieActions';
+import {
+  incrementViews,
+  likeMovie,
+  dislikeMovie,
+  addRemoveWatchList,
+} from '../store/actions/MovieActions';
 import { currentMovie } from '../store/selectors/MovieSelectors';
 
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
+import Badge from 'react-bootstrap/Badge';
 
 import { GoCommentDiscussion } from 'react-icons/go';
 import { IoEyeSharp } from 'react-icons/io5';
 import { GrLike, GrDislike } from 'react-icons/gr';
+import { FaPlus, FaMinus } from 'react-icons/fa';
+
 import CommentSection from '../component/movie/CommentSection';
 import RelatedMovies from '../component/movie/RelatedMovies';
 
@@ -33,8 +41,37 @@ const MoviePage = () => {
             <Card.Img src={movie.cover} style={{ maxWidth: '50%' }} />
             <Card.Body>
               <Card.Title>{movie.title}</Card.Title>
-              <Card.Subtitle className="mb-2 text-muted">{movie.genre}</Card.Subtitle>
+              <Card.Subtitle className="mb-2 text-muted">
+                {movie.genre}
+                <h6>
+                  {movie.watched_by_user && (
+                    <Badge pill bg="warning">
+                      Watched
+                    </Badge>
+                  )}
+                </h6>
+              </Card.Subtitle>
               <Card.Text>{movie.description}</Card.Text>
+              {movie.in_users_watchlist ? (
+                <Button
+                  variant="danger"
+                  className="shadow-none mb-2"
+                  title="Remove from watch list"
+                  onClick={() => dispatch(addRemoveWatchList(movie.id))}
+                >
+                  <FaMinus /> watch list
+                </Button>
+              ) : (
+                <Button
+                  variant="primary"
+                  className="shadow-none mb-2"
+                  title="Add to watch list"
+                  onClick={() => dispatch(addRemoveWatchList(movie.id))}
+                >
+                  <FaPlus /> watch list
+                </Button>
+              )}
+              <br />
               <small className="text-muted">
                 {movie.likes}
                 <Button

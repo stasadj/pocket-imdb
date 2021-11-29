@@ -11,6 +11,7 @@ import {
   setRelated,
   updateMovie,
   addComment,
+  setWatchList,
 } from '../actions/MovieActions';
 
 import { HOME } from '../../routes/routes';
@@ -60,6 +61,16 @@ export function* relatedGet({ payload }) {
     const { data } = yield call(movieService.getRelated, payload);
 
     yield put(setRelated(data));
+  } catch (error) {
+    console.log({ error }); /*eslint-disable-line*/
+  }
+}
+
+export function* watchListGet() {
+  try {
+    const { data } = yield call(movieService.getWatchList);
+
+    yield put(setWatchList(data));
   } catch (error) {
     console.log({ error }); /*eslint-disable-line*/
   }
@@ -122,6 +133,26 @@ export function* movieCreate({ payload }) {
     const { data } = yield call(movieService.postMovie, payload);
     yield put(push(HOME));
     yield put(go());
+  } catch (error) {
+    console.log({ error }); /*eslint-disable-line*/
+  }
+}
+
+export function* watchListAddRemove({ payload }) {
+  try {
+    const { data } = yield call(movieService.addRemoveWatchList, payload);
+    yield put(setMovie(data));
+    yield put(updateMovie(data));
+  } catch (error) {
+    console.log({ error }); /*eslint-disable-line*/
+  }
+}
+
+export function* watchedUpdate({ payload }) {
+  try {
+    const { data } = yield call(movieService.updateWatched, payload);
+    yield put(setMovie(data));
+    yield put(updateMovie(data));
   } catch (error) {
     console.log({ error }); /*eslint-disable-line*/
   }

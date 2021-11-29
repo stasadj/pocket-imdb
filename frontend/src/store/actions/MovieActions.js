@@ -18,6 +18,10 @@ import {
   CREATE_MOVIE,
   POST_COMMENT,
   ADD_COMMENT,
+  GET_WATCH_LIST,
+  SET_WATCH_LIST,
+  ADD_REMOVE_WATCH_LIST,
+  UPDATE_WATCHED,
 } from './ActionTypes';
 
 export const getMovies = (payload) => {
@@ -102,6 +106,19 @@ export const setRelated = (payload) => {
   };
 };
 
+export const getWatchList = () => {
+  return {
+    type: GET_WATCH_LIST,
+  };
+};
+
+export const setWatchList = (payload) => {
+  return {
+    type: SET_WATCH_LIST,
+    payload,
+  };
+};
+
 export const incrementViews = (payload) => {
   return {
     type: INCREMENT_VIEWS,
@@ -147,6 +164,20 @@ export const addComment = (payload) => {
 export const createMovie = (payload) => {
   return {
     type: CREATE_MOVIE,
+    payload,
+  };
+};
+
+export const addRemoveWatchList = (payload) => {
+  return {
+    type: ADD_REMOVE_WATCH_LIST,
+    payload,
+  };
+};
+
+export const updateWatched = (payload) => {
+  return {
+    type: UPDATE_WATCHED,
     payload,
   };
 };

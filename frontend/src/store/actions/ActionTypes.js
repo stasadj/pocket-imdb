@@ -30,3 +30,8 @@ export const SET_POPULAR = 'SET_POPULAR';
 
 export const GET_RELATED = 'GET_RELATED';
 export const SET_RELATED = 'SET_RELATED';
+
+export const GET_WATCH_LIST = 'GET_WATCH_LIST';
+export const SET_WATCH_LIST = 'SET_WATCH_LIST';
+export const ADD_REMOVE_WATCH_LIST = 'ADD_REMOVE_WATCH_LIST';
+export const UPDATE_WATCHED = 'UPDATE_WATCHED';
