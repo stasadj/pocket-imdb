@@ -16,11 +16,13 @@ class MovieSerializer(serializers.ModelSerializer):
     dislikes = serializers.SerializerMethodField()
     liked_by_user = serializers.SerializerMethodField()
     disliked_by_user = serializers.SerializerMethodField()
+    watched_by_user = serializers.SerializerMethodField()
+    in_users_watchlist = serializers.SerializerMethodField()
 
     class Meta:
         model = Movie
         fields = ['id', 'title', 'description', 'cover', 'genre', 'views',
-                  'likes', 'dislikes', 'liked_by_user', 'disliked_by_user']
+                  'likes', 'dislikes', 'liked_by_user', 'disliked_by_user', 'watched_by_user', 'in_users_watchlist']
 
     def get_likes(self, obj):
         return obj.likes.count()
@@ -35,3 +37,11 @@ class MovieSerializer(serializers.ModelSerializer):
     def get_disliked_by_user(self, obj):
         user = self.context.get('request').user
         return True if obj.dislikes.filter(id=user.id).exists() else False
+
+    def get_watched_by_user(self, obj):
+        user = self.context.get('request').user
+        return True if obj.watch_list_items.filter(user__id=user.id, watched=True).exists() else False
+
+    def get_in_users_watchlist(self, obj):
+        user = self.context.get('request').user
+        return True if obj.watch_list_items.filter(user__id=user.id).exists() else False

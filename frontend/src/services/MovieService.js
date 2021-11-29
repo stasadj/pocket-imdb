@@ -3,6 +3,7 @@ import ApiService from './ApiService';
 const ENDPOINTS = {
   MOVIES: '/api/movies',
   GENRES: '/api/genres',
+  WATCH_LIST: 'api/watch-list',
 };
 
 class MovieService extends ApiService {
@@ -32,6 +33,10 @@ class MovieService extends ApiService {
     return this.apiClient.get(`${ENDPOINTS.MOVIES}/${params.id}/comments?limit=${params.limit}`);
   };
 
+  getWatchList = () => {
+    return this.apiClient.get(ENDPOINTS.WATCH_LIST);
+  };
+
   viewMovie = (id) => {
     return this.apiClient.patch(`${ENDPOINTS.MOVIES}/${id}`, {});
   };
@@ -51,6 +56,14 @@ class MovieService extends ApiService {
   };
   postMovie = (payload) => {
     return this.apiClient.post(ENDPOINTS.MOVIES, payload);
+  };
+
+  addRemoveWatchList = (id) => {
+    return this.apiClient.patch(`${ENDPOINTS.WATCH_LIST}/${id}/add-remove`, {});
+  };
+
+  updateWatched = (id) => {
+    return this.apiClient.patch(`${ENDPOINTS.WATCH_LIST}/${id}/watched`, {});
   };
 }
 

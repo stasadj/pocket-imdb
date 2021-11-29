@@ -12,7 +12,7 @@ import { logOut } from '../store/actions/AuthActions';
 
 import { useTranslation } from 'react-i18next';
 
-import { LOGIN, REGISTER, HOME, ABOUT, CREATE_MOVIE } from '../routes/routes';
+import { LOGIN, REGISTER, HOME, ABOUT, CREATE_MOVIE, WATCH_LIST } from '../routes/routes';
 
 const NavBar = () => {
   const isLoggedIn = useSelector(selectIsLoggedIn);
@@ -35,6 +35,9 @@ const NavBar = () => {
           <Nav className="me-auto">
             <NavLink className="nav-link" to={HOME}>
               {t('Home')}
+            </NavLink>
+            <NavLink className="nav-link" to={WATCH_LIST}>
+              {t('Watch List')}
             </NavLink>
             <NavLink className="nav-link" to={ABOUT}>
               {t('About app')}
