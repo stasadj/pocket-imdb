@@ -20,4 +20,5 @@ urlpatterns = [
          movies_views.related),
     path('api/movies/popular', movies_views.popular),
     path('api/genres', movies_views.get_genres),
+    path('api/watch-list', movies_views.watch_list),
 ]

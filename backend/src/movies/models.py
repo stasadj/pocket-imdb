@@ -86,6 +86,11 @@ class Movie(models.Model):
             movie.dislikes.add(user)
         return movie
 
+    @classmethod
+    def watch_list(cls, request):
+        user = request.user
+        return cls.objects.filter(watch_list_items__user=user)
+
 
 class Comment(models.Model):
     content = models.CharField(max_length=500, blank=False)
