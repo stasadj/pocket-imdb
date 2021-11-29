@@ -12,7 +12,15 @@ import { logOut } from '../store/actions/AuthActions';
 
 import { useTranslation } from 'react-i18next';
 
-import { LOGIN, REGISTER, HOME, ABOUT, CREATE_MOVIE, WATCH_LIST } from '../routes/routes';
+import {
+  LOGIN,
+  REGISTER,
+  HOME,
+  ABOUT,
+  CREATE_MOVIE,
+  CREATE_MOVIE_OMDB,
+  WATCH_LIST,
+} from '../routes/routes';
 
 const NavBar = () => {
   const isLoggedIn = useSelector(selectIsLoggedIn);
@@ -59,6 +67,16 @@ const NavBar = () => {
             onClick={() => navigate(CREATE_MOVIE)}
           >
             {t('Create movie')}
+          </Button>
+        )}
+        {isLoggedIn && (
+          <Button
+            variant="outline-success"
+            type="submit"
+            className="mx-1"
+            onClick={() => navigate(CREATE_MOVIE_OMDB)}
+          >
+            {t('Create with OMDB')}
           </Button>
         )}
         {isLoggedIn && (
