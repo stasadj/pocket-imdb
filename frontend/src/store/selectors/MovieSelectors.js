@@ -15,3 +15,5 @@ export const movieComments = createSelector(movieStateSelector, (state) => state
 export const popularMovies = createSelector(movieStateSelector, (state) => state.popular);
 
 export const relatedMovies = createSelector(movieStateSelector, (state) => state.related);
+
+export const watchListMovies = createSelector(movieStateSelector, (state) => state.watch_list);

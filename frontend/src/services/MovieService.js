@@ -3,6 +3,7 @@ import ApiService from './ApiService';
 const ENDPOINTS = {
   MOVIES: '/api/movies',
   GENRES: '/api/genres',
+  WATCH_LIST: 'api/watch-list',
 };
 
 class MovieService extends ApiService {
@@ -30,6 +31,10 @@ class MovieService extends ApiService {
 
   getComments = (params) => {
     return this.apiClient.get(`${ENDPOINTS.MOVIES}/${params.id}/comments?limit=${params.limit}`);
+  };
+
+  getWatchList = () => {
+    return this.apiClient.get(ENDPOINTS.WATCH_LIST);
   };
 
   viewMovie = (id) => {

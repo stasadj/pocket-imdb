@@ -7,6 +7,7 @@ import {
   SET_RELATED,
   UPDATE_MOVIE,
   ADD_COMMENT,
+  SET_WATCH_LIST,
 } from '../actions/ActionTypes';
 
 const initialState = {
@@ -17,6 +18,7 @@ const initialState = {
   comments: [],
   popular: [],
   related: [],
+  watch_list: [],
 };
 const movieReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -32,6 +34,8 @@ const movieReducer = (state = initialState, action) => {
       return { ...state, popular: action.payload };
     case SET_RELATED:
       return { ...state, related: action.payload };
+    case SET_WATCH_LIST:
+      return { ...state, watch_list: action.payload };
     case UPDATE_MOVIE:
       return {
         ...state,
