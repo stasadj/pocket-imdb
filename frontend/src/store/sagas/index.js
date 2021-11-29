@@ -13,6 +13,7 @@ import {
   LIKE,
   DISLIKE,
   POST_COMMENT,
+  CREATE_MOVIE,
 } from '../actions/ActionTypes';
 import { userLogin, userRegister, userLogout } from './AuthSagas';
 import {
@@ -26,6 +27,7 @@ import {
   movieLike,
   movieDislike,
   movieComment,
+  movieCreate,
 } from './MovieSagas';
 
 export default function* rootSaga() {
@@ -43,5 +45,6 @@ export default function* rootSaga() {
     takeLatest(LIKE, movieLike),
     takeLatest(DISLIKE, movieDislike),
     takeLatest(POST_COMMENT, movieComment),
+    takeLatest(CREATE_MOVIE, movieCreate),
   ]);
 }

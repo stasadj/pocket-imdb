@@ -49,6 +49,9 @@ class MovieService extends ApiService {
       content: payload.content,
     });
   };
+  postMovie = (payload) => {
+    return this.apiClient.post(ENDPOINTS.MOVIES, payload);
+  };
 }
 
 export const movieService = new MovieService();
