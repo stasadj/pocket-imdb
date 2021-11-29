@@ -131,3 +131,11 @@ class WatchListItem(models.Model):
         else:
             cls.objects.create(user=user, movie=movie)
         return movie
+
+    @classmethod
+    def set_watched(cls, user, movie_id):
+        movie = Movie.objects.get(id=movie_id)
+        item = cls.objects.get(user=user, movie=movie)
+        item.watched = not item.watched
+        item.save()
+        return movie

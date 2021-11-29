@@ -23,4 +23,6 @@ urlpatterns = [
     path('api/watch-list', movies_views.watch_list),
     path('api/watch-list/<int:movie_id>/add-remove',
          movies_views.watch_list_add_remove),
+    path('api/watch-list/<int:movie_id>/watched',
+         movies_views.watched),
 ]
