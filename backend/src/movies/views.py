@@ -1,5 +1,5 @@
 from rest_framework.decorators import api_view, permission_classes
-from rest_framework.generics import ListAPIView, RetrieveUpdateAPIView
+from rest_framework.generics import ListAPIView, ListCreateAPIView, RetrieveUpdateAPIView
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.pagination import PageNumberPagination, LimitOffsetPagination
 from rest_framework.response import Response
@@ -7,13 +7,16 @@ from .serializers import MovieSerializer, CommentSerializer
 from .models import Comment, Movie, GENRE_CHOICES
 
 
-class MovieListAPIView(ListAPIView):
+class MovieListCreateAPIView(ListCreateAPIView):
     permission_classes = (IsAuthenticated,)
     pagination_class = PageNumberPagination
     serializer_class = MovieSerializer
 
     def get_queryset(self):
         return Movie.get_queryset(self.request)
+
+    def create(self, request):
+        return Response(MovieSerializer(Movie.create(request), context={'request': request}).data)
 
 
 class MovieRetrieveUpdateAPIView(RetrieveUpdateAPIView):
