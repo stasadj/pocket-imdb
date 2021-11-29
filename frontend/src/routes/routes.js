@@ -6,5 +6,6 @@ export const HOME = '/home';
 export const ABOUT = '/about';
 
 export const MOVIES = '/movies';
+export const CREATE_MOVIE = '/create-movie';
 
 export const ANY = '*';

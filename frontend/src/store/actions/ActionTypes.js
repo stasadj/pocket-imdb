@@ -15,6 +15,7 @@ export const UPDATE_MOVIE = 'UPDATE_MOVIE';
 export const INCREMENT_VIEWS = 'INCREMENT_VIEWS';
 export const LIKE = 'LIKE';
 export const DISLIKE = 'DISLIKE';
+export const CREATE_MOVIE = 'CREATE_MOVIE';
 
 export const GET_GENRES = 'GET_GENRES';
 export const SET_GENRES = 'SET_GENRES';

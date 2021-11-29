@@ -3,13 +3,13 @@ import { NavLink, useParams } from 'react-router-dom';
 
 import { useDispatch, useSelector } from 'react-redux';
 
-import { getRelated } from '../store/actions/MovieActions';
-import { relatedMovies } from '../store/selectors/MovieSelectors';
+import { getRelated } from '../../store/actions/MovieActions';
+import { relatedMovies } from '../../store/selectors/MovieSelectors';
 
 import ListGroup from 'react-bootstrap/ListGroup';
 import ListGroupItem from 'react-bootstrap/ListGroupItem';
 
-import { MOVIES } from '../routes/routes';
+import { MOVIES } from '../../routes/routes';
 
 const RelatedMovies = () => {
   const dispatch = useDispatch();

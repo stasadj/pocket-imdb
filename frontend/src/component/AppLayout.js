@@ -3,6 +3,7 @@ import { Routes, Route } from 'react-router-dom';
 
 import Login from '../containers/auth/Login';
 import Register from '../containers/auth/Register';
+import CreateMovie from './movie/CreateMovie';
 import Home from '../containers/Home';
 import MoviePage from '../containers/MoviePage';
 import NavBar from './NavBar';
@@ -10,7 +11,7 @@ import NavBar from './NavBar';
 import { useSelector } from 'react-redux';
 import { selectIsLoggedIn } from '../store/selectors/AuthSelectors';
 
-import { REGISTER, MOVIES, ANY } from '../routes/routes';
+import { REGISTER, MOVIES, ANY, CREATE_MOVIE } from '../routes/routes';
 
 const AppLayout = () => {
   const isLoggedIn = useSelector(selectIsLoggedIn);
@@ -21,6 +22,7 @@ const AppLayout = () => {
       <Routes>
         {isLoggedIn && <Route path={ANY} element={<Home />} />}
         {isLoggedIn && <Route path={`${MOVIES}/:id`} element={<MoviePage />} />}
+        {isLoggedIn && <Route path={CREATE_MOVIE} element={<CreateMovie />} />}
         {!isLoggedIn && <Route path={ANY} element={<Login />} />}
         {!isLoggedIn && <Route exact path={REGISTER} element={<Register />} />}
       </Routes>
