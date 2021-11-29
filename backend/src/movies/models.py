@@ -43,14 +43,14 @@ class Movie(models.Model):
         return queryset
 
     @classmethod
-    def popular(cls):
-        return cls.objects.all().annotate(likes_count=models.Count(
-            'likes')).order_by('-likes_count')[:10]
-
-    @classmethod
     def create(cls, request):
         movie = json.loads(request.body)
         return cls.objects.create(title=movie['title'], description=movie['description'], cover=movie['cover'], genre=movie['genre'])
+
+    @classmethod
+    def popular(cls):
+        return cls.objects.all().annotate(likes_count=models.Count(
+            'likes')).order_by('-likes_count')[:10]
 
     @classmethod
     def related(cls, movie_id):
@@ -108,3 +108,11 @@ class Comment(models.Model):
         movie = Movie.objects.get(id=pk)
         content = json.loads(request.body)['content']
         return cls.objects.create(user=user, movie=movie, content=content)
+
+
+class WatchListItem(models.Model):
+    watched = models.BooleanField(default=False)
+    user = models.ForeignKey(
+        User, related_name='watch_list_items', on_delete=models.CASCADE)
+    movie = models.ForeignKey(
+        Movie, related_name='watch_list_items', on_delete=models.CASCADE)
