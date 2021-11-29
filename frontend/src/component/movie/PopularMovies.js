@@ -21,7 +21,7 @@ const PopularMovies = () => {
 
   const renderPopular = () => {
     return popular.map((movie, index) => (
-      <NavLink className="link-light" to={`${MOVIES}/${movie.id}`}>
+      <NavLink key={movie.id} className="link-light" to={`${MOVIES}/${movie.id}`}>
         <ListGroupItem className="text-muted" style={{ textAlign: 'left' }}>
           <h6>
             {index + 1}. {movie.title}
