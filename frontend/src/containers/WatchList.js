@@ -4,9 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getWatchList } from '../store/actions/MovieActions';
 import { watchListMovies } from '../store/selectors/MovieSelectors';
 
-import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
 
 import WatchListItem from '../component/movie/WatchListItem';
 

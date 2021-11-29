@@ -1,5 +1,8 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+
+import { addRemoveWatchList } from '../../store/actions/MovieActions';
 
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
@@ -12,6 +15,8 @@ import { GrLike, GrDislike } from 'react-icons/gr';
 import { FaPlus, FaMinus } from 'react-icons/fa';
 
 const MovieCard = ({ movie, onLike, onDislike }) => {
+  const dispatch = useDispatch();
+
   return (
     <Card className="mb-3" style={{ maxWidth: '20%' }}>
       <NavLink className="link-dark" to={`${MOVIES}/${movie.id}`}>
@@ -31,11 +36,21 @@ const MovieCard = ({ movie, onLike, onDislike }) => {
         <Card.Text>{movie.description}</Card.Text>
       </Card.Body>
       {movie.in_users_watchlist ? (
-        <Button variant="danger" className="shadow-none mb-2" title="Remove from watch list">
+        <Button
+          variant="danger"
+          className="shadow-none mb-2"
+          title="Remove from watch list"
+          onClick={() => dispatch(addRemoveWatchList(movie.id))}
+        >
           <FaMinus /> watch list
         </Button>
       ) : (
-        <Button variant="primary" className="shadow-none mb-2" title="Add to watch list">
+        <Button
+          variant="primary"
+          className="shadow-none mb-2"
+          title="Add to watch list"
+          onClick={() => dispatch(addRemoveWatchList(movie.id))}
+        >
           <FaPlus /> watch list
         </Button>
       )}

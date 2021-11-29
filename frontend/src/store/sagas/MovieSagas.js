@@ -137,3 +137,13 @@ export function* movieCreate({ payload }) {
     console.log({ error }); /*eslint-disable-line*/
   }
 }
+
+export function* watchListAddRemove({ payload }) {
+  try {
+    const { data } = yield call(movieService.addRemoveWatchList, payload);
+    yield put(setMovie(data));
+    yield put(updateMovie(data));
+  } catch (error) {
+    console.log({ error }); /*eslint-disable-line*/
+  }
+}
