@@ -15,6 +15,7 @@ import {
   LIKE,
   DISLIKE,
   UPDATE_MOVIE,
+  CREATE_MOVIE,
   POST_COMMENT,
   ADD_COMMENT,
 } from './ActionTypes';
@@ -139,6 +140,13 @@ export const postComment = (payload) => {
 export const addComment = (payload) => {
   return {
     type: ADD_COMMENT,
+    payload,
+  };
+};
+
+export const createMovie = (payload) => {
+  return {
+    type: CREATE_MOVIE,
     payload,
   };
 };

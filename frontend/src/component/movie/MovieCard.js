@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 
-import { MOVIES } from '../routes/routes';
+import { MOVIES } from '../../routes/routes';
 
 import { IoEyeSharp } from 'react-icons/io5';
 import { GrLike, GrDislike } from 'react-icons/gr';

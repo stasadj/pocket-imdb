@@ -12,7 +12,7 @@ import { logOut } from '../store/actions/AuthActions';
 
 import { useTranslation } from 'react-i18next';
 
-import { LOGIN, REGISTER, HOME, ABOUT } from '../routes/routes';
+import { LOGIN, REGISTER, HOME, ABOUT, CREATE_MOVIE } from '../routes/routes';
 
 const NavBar = () => {
   const isLoggedIn = useSelector(selectIsLoggedIn);
@@ -48,6 +48,16 @@ const NavBar = () => {
         <Button variant="light" onClick={() => i18n.changeLanguage('en')}>
           EN
         </Button>
+        {isLoggedIn && (
+          <Button
+            variant="outline-success"
+            type="submit"
+            className="mx-1"
+            onClick={() => navigate(CREATE_MOVIE)}
+          >
+            {t('Create movie')}
+          </Button>
+        )}
         {isLoggedIn && (
           <Button variant="success" type="submit" onClick={handleLogout}>
             {t('Log out')}

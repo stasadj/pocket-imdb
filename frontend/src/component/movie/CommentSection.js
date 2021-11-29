@@ -11,8 +11,8 @@ import ListGroupItem from 'react-bootstrap/ListGroupItem';
 
 import { FaUserAstronaut } from 'react-icons/fa';
 
-import { getComments, postComment } from '../store/actions/MovieActions';
-import { movieComments } from '../store/selectors/MovieSelectors';
+import { getComments, postComment } from '../../store/actions/MovieActions';
+import { movieComments } from '../../store/selectors/MovieSelectors';
 
 import { useFormik } from 'formik';
 import * as Yup from 'yup';

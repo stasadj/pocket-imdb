@@ -6,7 +6,7 @@ from src.movies import views as movies_views
 urlpatterns = [
     path('api/auth/login', auths_views.login),
     path('api/auth/register', auths_views.register),
-    path('api/movies', movies_views.MovieListAPIView.as_view()),
+    path('api/movies', movies_views.MovieListCreateAPIView.as_view()),
     path('api/movies/<int:pk>', movies_views.MovieRetrieveUpdateAPIView.as_view()),
     path('api/movies/<int:pk>/like',
          movies_views.like_movie),

@@ -3,14 +3,14 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { getGenres, getMovies, likeMovie, dislikeMovie } from '../store/actions/MovieActions';
 import { allMovies, movieGenres, moviePages } from '../store/selectors/MovieSelectors';
-import MovieCard from '../component/MovieCard';
 
-import MoviePagination from '../component/MoviePagination';
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
-import PopularMovies from '../component/PopularMovies';
+import MovieCard from '../component/movie/MovieCard';
+import PopularMovies from '../component/movie/PopularMovies';
+import MoviePagination from '../component/movie/MoviePagination';
 
 const Home = () => {
   const dispatch = useDispatch();
