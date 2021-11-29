@@ -18,6 +18,8 @@ import {
   CREATE_MOVIE,
   POST_COMMENT,
   ADD_COMMENT,
+  GET_WATCH_LIST,
+  SET_WATCH_LIST,
 } from './ActionTypes';
 
 export const getMovies = (payload) => {
@@ -98,6 +100,19 @@ export const getRelated = (payload) => {
 export const setRelated = (payload) => {
   return {
     type: SET_RELATED,
+    payload,
+  };
+};
+
+export const getWatchList = () => {
+  return {
+    type: GET_WATCH_LIST,
+  };
+};
+
+export const setWatchList = (payload) => {
+  return {
+    type: SET_WATCH_LIST,
     payload,
   };
 };
