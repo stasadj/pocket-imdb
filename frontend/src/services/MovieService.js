@@ -61,6 +61,10 @@ class MovieService extends ApiService {
   addRemoveWatchList = (id) => {
     return this.apiClient.patch(`${ENDPOINTS.WATCH_LIST}/${id}/add-remove`, {});
   };
+
+  updateWatched = (id) => {
+    return this.apiClient.patch(`${ENDPOINTS.WATCH_LIST}/${id}/watched`, {});
+  };
 }
 
 export const movieService = new MovieService();

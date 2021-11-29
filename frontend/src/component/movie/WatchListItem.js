@@ -2,7 +2,7 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 
-import { addRemoveWatchList } from '../../store/actions/MovieActions';
+import { addRemoveWatchList, updateWatched } from '../../store/actions/MovieActions';
 
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
@@ -35,11 +35,21 @@ const WatchListItem = ({ movie }) => {
         <Card.Text>{movie.description}</Card.Text>
       </Card.Body>
       {movie.watched_by_user ? (
-        <Button variant="warning" className="shadow-none mb-2" title="Remove from watch list">
+        <Button
+          variant="warning"
+          className="shadow-none mb-2"
+          title="Remove from watch list"
+          onClick={() => dispatch(updateWatched(movie.id))}
+        >
           <FaMinus /> wathced
         </Button>
       ) : (
-        <Button variant="outline-warning" className="shadow-none mb-2" title="Add to watch list">
+        <Button
+          variant="outline-warning"
+          className="shadow-none mb-2"
+          title="Add to watch list"
+          onClick={() => dispatch(updateWatched(movie.id))}
+        >
           <FaPlus /> watched
         </Button>
       )}

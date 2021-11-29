@@ -21,6 +21,7 @@ import {
   GET_WATCH_LIST,
   SET_WATCH_LIST,
   ADD_REMOVE_WATCH_LIST,
+  UPDATE_WATCHED,
 } from './ActionTypes';
 
 export const getMovies = (payload) => {
@@ -170,6 +171,13 @@ export const createMovie = (payload) => {
 export const addRemoveWatchList = (payload) => {
   return {
     type: ADD_REMOVE_WATCH_LIST,
+    payload,
+  };
+};
+
+export const updateWatched = (payload) => {
+  return {
+    type: UPDATE_WATCHED,
     payload,
   };
 };
