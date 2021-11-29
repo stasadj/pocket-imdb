@@ -83,3 +83,9 @@ def watch_list(request):
 @permission_classes([IsAuthenticated, ])
 def watch_list_add_remove(request, movie_id):
     return Response(MovieSerializer(WatchListItem.add_remove(request.user, movie_id), context={'request': request}).data)
+
+
+@api_view(http_method_names=['PATCH'])
+@permission_classes([IsAuthenticated, ])
+def watched(request, movie_id):
+    return Response(MovieSerializer(WatchListItem.set_watched(request.user, movie_id), context={'request': request}).data)
