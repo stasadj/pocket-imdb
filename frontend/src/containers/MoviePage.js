@@ -13,8 +13,8 @@ import Button from 'react-bootstrap/Button';
 import { GoCommentDiscussion } from 'react-icons/go';
 import { IoEyeSharp } from 'react-icons/io5';
 import { GrLike, GrDislike } from 'react-icons/gr';
-import CommentSection from '../component/CommentSection';
-import RelatedMovies from '../component/RelatedMovies';
+import CommentSection from '../component/movie/CommentSection';
+import RelatedMovies from '../component/movie/RelatedMovies';
 
 const MoviePage = () => {
   const dispatch = useDispatch();

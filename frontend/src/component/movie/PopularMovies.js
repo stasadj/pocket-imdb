@@ -3,13 +3,13 @@ import { NavLink } from 'react-router-dom';
 
 import { useDispatch, useSelector } from 'react-redux';
 
-import { getPopular } from '../store/actions/MovieActions';
-import { popularMovies } from '../store/selectors/MovieSelectors';
+import { getPopular } from '../../store/actions/MovieActions';
+import { popularMovies } from '../../store/selectors/MovieSelectors';
 
 import ListGroup from 'react-bootstrap/ListGroup';
 import ListGroupItem from 'react-bootstrap/ListGroupItem';
 
-import { MOVIES } from '../routes/routes';
+import { MOVIES } from '../../routes/routes';
 
 const PopularMovies = () => {
   const dispatch = useDispatch();

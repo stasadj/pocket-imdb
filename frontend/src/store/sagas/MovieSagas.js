@@ -1,4 +1,5 @@
 import { call, put } from 'redux-saga/effects';
+import { push, go } from 'connected-react-router';
 
 import { movieService } from '../../services/MovieService';
 import {
@@ -11,6 +12,8 @@ import {
   updateMovie,
   addComment,
 } from '../actions/MovieActions';
+
+import { HOME } from '../../routes/routes';
 
 export function* moviesGet({ payload }) {
   try {
@@ -109,6 +112,16 @@ export function* movieComment({ payload }) {
     const { data } = yield call(movieService.postComment, payload);
 
     yield put(addComment(data));
+  } catch (error) {
+    console.log({ error }); /*eslint-disable-line*/
+  }
+}
+
+export function* movieCreate({ payload }) {
+  try {
+    const { data } = yield call(movieService.postMovie, payload);
+    yield put(push(HOME));
+    yield put(go());
   } catch (error) {
     console.log({ error }); /*eslint-disable-line*/
   }
