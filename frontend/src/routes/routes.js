@@ -7,5 +7,6 @@ export const ABOUT = '/about';
 
 export const MOVIES = '/movies';
 export const CREATE_MOVIE = '/create-movie';
+export const WATCH_LIST = '/watch-list';
 
 export const ANY = '*';
