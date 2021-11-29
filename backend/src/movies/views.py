@@ -4,7 +4,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.pagination import PageNumberPagination, LimitOffsetPagination
 from rest_framework.response import Response
 from .serializers import MovieSerializer, CommentSerializer
-from .models import Comment, Movie, GENRE_CHOICES
+from .models import Comment, Movie, GENRE_CHOICES, WatchListItem
 
 
 class MovieListCreateAPIView(ListCreateAPIView):
@@ -77,3 +77,9 @@ def add_comment(request, pk):
 @permission_classes([IsAuthenticated, ])
 def watch_list(request):
     return Response(MovieSerializer(Movie.watch_list(request), context={'request': request}, many=True).data)
+
+
+@api_view(http_method_names=['PATCH'])
+@permission_classes([IsAuthenticated, ])
+def watch_list_add_remove(request, movie_id):
+    return Response(MovieSerializer(WatchListItem.add_remove(request.user, movie_id), context={'request': request}).data)

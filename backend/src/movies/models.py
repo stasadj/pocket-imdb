@@ -121,3 +121,13 @@ class WatchListItem(models.Model):
         User, related_name='watch_list_items', on_delete=models.CASCADE)
     movie = models.ForeignKey(
         Movie, related_name='watch_list_items', on_delete=models.CASCADE)
+
+    @classmethod
+    def add_remove(cls, user, movie_id):
+        movie = Movie.objects.get(id=movie_id)
+        item = cls.objects.filter(user=user, movie=movie)
+        if item.exists():
+            item.delete()
+        else:
+            cls.objects.create(user=user, movie=movie)
+        return movie
