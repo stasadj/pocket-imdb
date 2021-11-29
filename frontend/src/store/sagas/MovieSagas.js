@@ -147,3 +147,13 @@ export function* watchListAddRemove({ payload }) {
     console.log({ error }); /*eslint-disable-line*/
   }
 }
+
+export function* watchedUpdate({ payload }) {
+  try {
+    const { data } = yield call(movieService.updateWatched, payload);
+    yield put(setMovie(data));
+    yield put(updateMovie(data));
+  } catch (error) {
+    console.log({ error }); /*eslint-disable-line*/
+  }
+}
