@@ -23,7 +23,7 @@ const RelatedMovies = () => {
   const renderPopular = () => {
     return related.length > 0 ? (
       related.map((movie, index) => (
-        <NavLink className="link-light" to={`${MOVIES}/${movie.id}`}>
+        <NavLink key={movie.id} className="link-light" to={`${MOVIES}/${movie.id}`}>
           <ListGroupItem className="text-muted">
             <h6>
               {index + 1}. {movie.title}
