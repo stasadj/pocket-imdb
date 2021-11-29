@@ -130,7 +130,7 @@ export function* movieComment({ payload }) {
 
 export function* movieCreate({ payload }) {
   try {
-    const { data } = yield call(movieService.postMovie, payload);
+    yield call(movieService.postMovie, payload);
     yield put(push(HOME));
     yield put(go());
   } catch (error) {
