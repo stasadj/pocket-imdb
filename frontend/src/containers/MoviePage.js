@@ -2,7 +2,12 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 
-import { incrementViews, likeMovie, dislikeMovie } from '../store/actions/MovieActions';
+import {
+  incrementViews,
+  likeMovie,
+  dislikeMovie,
+  addRemoveWatchList,
+} from '../store/actions/MovieActions';
 import { currentMovie } from '../store/selectors/MovieSelectors';
 
 import Row from 'react-bootstrap/Row';
@@ -52,11 +57,17 @@ const MoviePage = () => {
                   variant="danger"
                   className="shadow-none mb-2"
                   title="Remove from watch list"
+                  onClick={() => dispatch(addRemoveWatchList(movie.id))}
                 >
                   <FaMinus /> watch list
                 </Button>
               ) : (
-                <Button variant="primary" className="shadow-none mb-2" title="Add to watch list">
+                <Button
+                  variant="primary"
+                  className="shadow-none mb-2"
+                  title="Add to watch list"
+                  onClick={() => dispatch(addRemoveWatchList(movie.id))}
+                >
                   <FaPlus /> watch list
                 </Button>
               )}

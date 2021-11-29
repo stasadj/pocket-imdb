@@ -40,6 +40,9 @@ const movieReducer = (state = initialState, action) => {
       return {
         ...state,
         all: state.all.map((movie) => (movie.id === action.payload.id ? action.payload : movie)),
+        watch_list: state.watch_list
+          .map((movie) => (movie.id === action.payload.id ? action.payload : movie))
+          .filter((movie) => movie.in_users_watchlist),
       };
     case ADD_COMMENT:
       return {

@@ -20,6 +20,7 @@ import {
   ADD_COMMENT,
   GET_WATCH_LIST,
   SET_WATCH_LIST,
+  ADD_REMOVE_WATCH_LIST,
 } from './ActionTypes';
 
 export const getMovies = (payload) => {
@@ -162,6 +163,13 @@ export const addComment = (payload) => {
 export const createMovie = (payload) => {
   return {
     type: CREATE_MOVIE,
+    payload,
+  };
+};
+
+export const addRemoveWatchList = (payload) => {
+  return {
+    type: ADD_REMOVE_WATCH_LIST,
     payload,
   };
 };

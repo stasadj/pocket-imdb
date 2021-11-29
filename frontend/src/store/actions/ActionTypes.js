@@ -33,3 +33,4 @@ export const SET_RELATED = 'SET_RELATED';
 
 export const GET_WATCH_LIST = 'GET_WATCH_LIST';
 export const SET_WATCH_LIST = 'SET_WATCH_LIST';
+export const ADD_REMOVE_WATCH_LIST = 'ADD_REMOVE_WATCH_LIST';

@@ -57,6 +57,10 @@ class MovieService extends ApiService {
   postMovie = (payload) => {
     return this.apiClient.post(ENDPOINTS.MOVIES, payload);
   };
+
+  addRemoveWatchList = (id) => {
+    return this.apiClient.patch(`${ENDPOINTS.WATCH_LIST}/${id}/add-remove`, {});
+  };
 }
 
 export const movieService = new MovieService();
