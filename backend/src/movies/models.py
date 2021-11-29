@@ -15,7 +15,7 @@ GENRE_CHOICES = [
     (8, 'Biography'),
     (9, 'Comedy'),
     (10, 'Crime'),
-    (10, 'History'),
+    (11, 'History'),
 ]
 
 
@@ -46,6 +46,11 @@ class Movie(models.Model):
     def popular(cls):
         return cls.objects.all().annotate(likes_count=models.Count(
             'likes')).order_by('-likes_count')[:10]
+
+    @classmethod
+    def create(cls, request):
+        movie = json.loads(request.body)
+        return cls.objects.create(title=movie['title'], description=movie['description'], cover=movie['cover'], genre=movie['genre'])
 
     @classmethod
     def related(cls, movie_id):
