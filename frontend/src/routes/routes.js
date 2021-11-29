@@ -7,6 +7,7 @@ export const ABOUT = '/about';
 
 export const MOVIES = '/movies';
 export const CREATE_MOVIE = '/create-movie';
+export const CREATE_MOVIE_OMDB = '/create-movie-omdb';
 export const WATCH_LIST = '/watch-list';
 
 export const ANY = '*';
