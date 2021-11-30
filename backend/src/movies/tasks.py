@@ -4,7 +4,7 @@ from celery import shared_task
 
 
 @shared_task(autoretry_for=(TimeoutError, BadRequest,))
-def send_mail_to_admin(movie):
+def send_mail_task(movie):
     send_mail(
         'New movie: {}'.format(movie['title']),
         'Title: {}\nDescription: {}\nGenre: {}'.format(
