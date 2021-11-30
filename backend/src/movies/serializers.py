@@ -18,11 +18,13 @@ class MovieSerializer(serializers.ModelSerializer):
     disliked_by_user = serializers.SerializerMethodField()
     watched_by_user = serializers.SerializerMethodField()
     in_users_watchlist = serializers.SerializerMethodField()
+    thumbnail = serializers.SerializerMethodField()
+    full_size = serializers.SerializerMethodField()
 
     class Meta:
         model = Movie
-        fields = ['id', 'title', 'description', 'cover', 'genre', 'views',
-                  'likes', 'dislikes', 'liked_by_user', 'disliked_by_user', 'watched_by_user', 'in_users_watchlist']
+        fields = ['id', 'title', 'description', 'genre', 'views',
+                  'likes', 'dislikes', 'liked_by_user', 'disliked_by_user', 'watched_by_user', 'in_users_watchlist', 'thumbnail', 'full_size']
 
     def get_likes(self, obj):
         return obj.likes.count()
@@ -45,3 +47,9 @@ class MovieSerializer(serializers.ModelSerializer):
     def get_in_users_watchlist(self, obj):
         user = self.context.get('request').user
         return True if obj.watch_list_items.filter(user__id=user.id).exists() else False
+
+    def get_thumbnail(self, obj):
+        return obj.images.thumbnail.url if obj.images is not None else False
+
+    def get_full_size(self, obj):
+        return obj.images.full_size.url if obj.images is not None else False

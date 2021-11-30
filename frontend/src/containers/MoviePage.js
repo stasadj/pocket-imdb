@@ -24,6 +24,8 @@ import { FaPlus, FaMinus } from 'react-icons/fa';
 import CommentSection from '../component/movie/CommentSection';
 import RelatedMovies from '../component/movie/RelatedMovies';
 
+import config from '../config';
+
 const MoviePage = () => {
   const dispatch = useDispatch();
   const params = useParams();
@@ -38,7 +40,10 @@ const MoviePage = () => {
       <Col md={8} style={{ border: '1px solid lightgrey' }}>
         <Card style={{ maxWidth: '100%', border: '0px' }}>
           <div style={{ display: 'flex', flex: '1 1 auto' }}>
-            <Card.Img src={movie.cover} style={{ maxWidth: '50%' }} />
+            <Card.Img
+              src={`${config.API_BASE_URL}${movie.full_size}`}
+              style={{ maxWidth: '50%' }}
+            />
             <Card.Body>
               <Card.Title>{movie.title}</Card.Title>
               <Card.Subtitle className="mb-2 text-muted">
