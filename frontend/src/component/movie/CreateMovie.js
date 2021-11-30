@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { getGenres, createMovie } from '../../store/actions/MovieActions';
@@ -14,7 +14,6 @@ import * as Yup from 'yup';
 const validationSchema = Yup.object({
   title: Yup.string().max(100, 'Must be 100 characters or less').required('Required'),
   description: Yup.string().max(500, 'Must be 500 characters or less').required('Required'),
-  cover: Yup.string().max(500, 'Must be 500 characters or less').required('Required'),
   genre: Yup.string().required('Required'),
 });
 
@@ -22,20 +21,30 @@ const CreateMovie = () => {
   const dispatch = useDispatch();
   const genres = useSelector(movieGenres);
 
+  const [image, setImage] = useState(null);
+
   useEffect(() => {
     dispatch(getGenres());
   }, []);
+
+  const getFormData = (values) => {
+    const formData = new FormData();
+    formData.append('title', values.title);
+    formData.append('description', values.description);
+    formData.append('cover', image, image.name);
+    formData.append('genre', values.genre);
+    return formData;
+  };
 
   const formik = useFormik({
     initialValues: {
       title: '',
       description: '',
-      cover: '',
       genre: '',
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
-      dispatch(createMovie(values));
+      dispatch(createMovie(getFormData(values)));
     },
   });
 
@@ -92,12 +101,9 @@ const CreateMovie = () => {
         <Form.Group className="col-4 offset-4 mb-3">
           <Form.Label>Cover</Form.Label>
           <Form.Control
-            id="cover"
-            name="cover"
-            type="text"
-            placeholder="Cover image link"
-            value={formik.values.cover}
-            onChange={formik.handleChange}
+            type="file"
+            accept="image/*"
+            onChange={(e) => setImage(e.target.files[0])}
           />
           {formik.touched.cover && formik.errors.cover && (
             <small className="form-text text-danger">{formik.errors.cover}</small>
