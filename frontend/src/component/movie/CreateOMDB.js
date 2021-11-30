@@ -16,6 +16,18 @@ const validationSchema = Yup.object({
 const CreateOMDB = () => {
   const dispatch = useDispatch();
 
+  const getFormData = (data, blob) => {
+    const file = new File([blob], `${data['Title'].toLowerCase().replace(' ', '-')}`, {
+      type: blob.type,
+    });
+    const formData = new FormData();
+    formData.append('title', data['Title']);
+    formData.append('description', data['Plot']);
+    formData.append('cover', file, file.name);
+    formData.append('genre', data['Genre'].split(',')[0].trim());
+    return formData;
+  };
+
   const formik = useFormik({
     initialValues: {
       title: '',
@@ -29,15 +41,7 @@ const CreateOMDB = () => {
             fetch(data['Poster'])
               .then((response) => response.blob())
               .then((blob) => {
-                const file = new File([blob], `${data['Title'].toLowerCase().replace(' ', '-')}`, {
-                  type: blob.type,
-                });
-                const formData = new FormData();
-                formData.append('title', data['Title']);
-                formData.append('description', data['Plot']);
-                formData.append('cover', file, file.name);
-                formData.append('genre', data['Genre'].split(',')[0].trim());
-                dispatch(createMovie(formData));
+                dispatch(createMovie(getFormData(data, blob)));
               });
           } else {
             formik.setErrors({ title: 'Movie with given name does not exist' });

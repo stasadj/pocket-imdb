@@ -27,6 +27,15 @@ const CreateMovie = () => {
     dispatch(getGenres());
   }, []);
 
+  const getFormData = (values) => {
+    const formData = new FormData();
+    formData.append('title', values.title);
+    formData.append('description', values.description);
+    formData.append('cover', image, image.name);
+    formData.append('genre', values.genre);
+    return formData;
+  };
+
   const formik = useFormik({
     initialValues: {
       title: '',
@@ -35,12 +44,7 @@ const CreateMovie = () => {
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
-      const formData = new FormData();
-      formData.append('title', values.title);
-      formData.append('description', values.description);
-      formData.append('cover', image, image.name);
-      formData.append('genre', values.genre);
-      dispatch(createMovie(formData));
+      dispatch(createMovie(getFormData(values)));
     },
   });
 
