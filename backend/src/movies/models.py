@@ -1,4 +1,5 @@
 from django.db import models
+from easy_thumbnails.fields import ThumbnailerImageField
 from src.users.models import User
 
 import json
@@ -19,10 +20,16 @@ GENRE_CHOICES = [
 ]
 
 
+class CoverImages(models.Model):
+    thumbnail = ThumbnailerImageField(
+        upload_to='static/thumbnails/', blank=True, null=True, resize_source=dict(size=(200, 200)))
+    full_size = ThumbnailerImageField(
+        upload_to='static/full-size/', blank=True, null=True, resize_source=dict(size=(400, 400)))
+
+
 class Movie(models.Model):
     title = models.CharField(max_length=100, blank=False)
     description = models.CharField(max_length=500, blank=False)
-    cover = models.CharField(max_length=500, blank=False)
     genre = models.CharField(
         max_length=15,
         choices=GENRE_CHOICES,
@@ -31,6 +38,12 @@ class Movie(models.Model):
     views = models.PositiveBigIntegerField(default=0)
     likes = models.ManyToManyField(User, related_name='movies_liked')
     dislikes = models.ManyToManyField(User, related_name='movies_disliked')
+    images = models.OneToOneField(
+        CoverImages,
+        on_delete=models.CASCADE,
+        blank=True,
+        null=True
+    )
 
     @classmethod
     def get_queryset(cls, request):
@@ -44,8 +57,11 @@ class Movie(models.Model):
 
     @classmethod
     def create(cls, request):
-        movie = json.loads(request.body)
-        return cls.objects.create(title=movie['title'], description=movie['description'], cover=movie['cover'], genre=movie['genre'])
+        movie = request.POST
+        cover = request.FILES.get('cover')
+        images = CoverImages.objects.create(
+            thumbnail=cover, full_size=cover)
+        return cls.objects.create(title=movie['title'], description=movie['description'], genre=movie['genre'], images=images)
 
     @classmethod
     def popular(cls):
