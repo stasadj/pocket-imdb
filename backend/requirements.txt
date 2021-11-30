@@ -10,6 +10,7 @@ click-repl==0.2.0
 cssselect2==0.4.1
 Deprecated==1.2.13
 Django==3.2.9
+django-celery-results==2.2.0
 django-cors-headers==3.10.0
 djangorestframework==3.12.4
 djangorestframework-simplejwt==5.0.0
