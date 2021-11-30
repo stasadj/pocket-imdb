@@ -1,7 +1,7 @@
 from django.db import models
 from easy_thumbnails.fields import ThumbnailerImageField
 from src.users.models import User
-from .services import send_mail_to_admin
+from .tasks import send_mail_to_admin
 
 import json
 
@@ -64,7 +64,8 @@ class Movie(models.Model):
             thumbnail=cover, full_size=cover)
         new_movie = cls.objects.create(
             title=movie['title'], description=movie['description'], genre=movie['genre'], images=images)
-        send_mail_to_admin(new_movie)
+        send_mail_to_admin.delay(
+            {'title': new_movie.title, 'description': new_movie.description, 'genre': new_movie.genre})
         return new_movie
 
     @classmethod
