@@ -197,3 +197,11 @@ STATICFILES_DIRS = [
 ]
 
 STATIC_URL = 'static/'
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.mailtrap.io'
+EMAIL_PORT = '2525'
+EMAIL_HOST_USER = '221dde993d0650'
+EMAIL_HOST_PASSWORD = 'f568d0953e59e3'
+EMAIL_USE_TLS = True
+EMAIL_USE_SSL = False
