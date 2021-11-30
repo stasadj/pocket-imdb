@@ -1,6 +1,7 @@
 from django.db import models
 from easy_thumbnails.fields import ThumbnailerImageField
 from src.users.models import User
+from .services import send_mail_to_admin
 
 import json
 
@@ -61,7 +62,10 @@ class Movie(models.Model):
         cover = request.FILES.get('cover')
         images = CoverImages.objects.create(
             thumbnail=cover, full_size=cover)
-        return cls.objects.create(title=movie['title'], description=movie['description'], genre=movie['genre'], images=images)
+        new_movie = cls.objects.create(
+            title=movie['title'], description=movie['description'], genre=movie['genre'], images=images)
+        send_mail_to_admin(new_movie)
+        return new_movie
 
     @classmethod
     def popular(cls):
