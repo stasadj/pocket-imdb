@@ -13,13 +13,15 @@ import { MOVIES } from '../../routes/routes';
 import { IoEyeSharp } from 'react-icons/io5';
 import { FaPlus, FaMinus } from 'react-icons/fa';
 
+import config from '../../config';
+
 const WatchListItem = ({ movie }) => {
   const dispatch = useDispatch();
 
   return (
     <Card className="mb-3" style={{ maxWidth: '20%' }}>
       <NavLink className="link-dark" to={`${MOVIES}/${movie.id}`}>
-        <Card.Img variant="top" src={movie.cover} />
+        <Card.Img variant="top" src={`${config.API_BASE_URL}${movie.thumbnail}`} />
       </NavLink>
       <Card.Body>
         <Card.Title>

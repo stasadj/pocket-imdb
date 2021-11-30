@@ -25,16 +25,23 @@ const CreateOMDB = () => {
       fetch(`http://www.omdbapi.com/?apikey=5f0252f3&t=${values.title}`)
         .then((response) => response.json())
         .then((data) => {
-          !data['Error']
-            ? dispatch(
-                createMovie({
-                  title: data['Title'],
-                  description: data['Plot'],
-                  cover: data['Poster'],
-                  genre: data['Genre'].split(',')[0].trim(),
-                }),
-              )
-            : formik.setErrors({ title: 'Movie with given name does not exist' });
+          if (!data['Error']) {
+            fetch(data['Poster'])
+              .then((response) => response.blob())
+              .then((blob) => {
+                const file = new File([blob], `${data['Title'].toLowerCase().replace(' ', '-')}`, {
+                  type: blob.type,
+                });
+                const formData = new FormData();
+                formData.append('title', data['Title']);
+                formData.append('description', data['Plot']);
+                formData.append('cover', file, file.name);
+                formData.append('genre', data['Genre'].split(',')[0].trim());
+                dispatch(createMovie(formData));
+              });
+          } else {
+            formik.setErrors({ title: 'Movie with given name does not exist' });
+          }
         });
     },
   });
