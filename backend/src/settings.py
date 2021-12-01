@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt',
     'corsheaders',
     'easy_thumbnails',  # image lib
+    'django_celery_results',
 
     # YOUR APPS
     'src.auths',
@@ -208,8 +209,9 @@ EMAIL_USE_SSL = False
 
 # CELERY STUFF
 BROKER_URL = 'redis://localhost:6379'
-CELERY_RESULT_BACKEND = 'redis://localhost:6379'
 CELERY_ACCEPT_CONTENT = ['application/json']
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
 CELERY_TIMEZONE = 'Europe/Berlin'
+
+CELERY_RESULT_BACKEND = 'django-db'
