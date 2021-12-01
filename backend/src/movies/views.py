@@ -5,6 +5,7 @@ from rest_framework.pagination import PageNumberPagination, LimitOffsetPaginatio
 from rest_framework.response import Response
 from .serializers import MovieSerializer, CommentSerializer
 from .models import Comment, Movie, GENRE_CHOICES, WatchListItem
+from .services import get_queryset_elasticsearch
 
 
 class MovieListCreateAPIView(ListCreateAPIView):
@@ -13,7 +14,8 @@ class MovieListCreateAPIView(ListCreateAPIView):
     serializer_class = MovieSerializer
 
     def get_queryset(self):
-        return Movie.get_queryset(self.request)
+        # return Movie.get_queryset(self.request)
+        return get_queryset_elasticsearch(self.request)
 
     def create(self, request):
         return Response(MovieSerializer(Movie.create(request), context={'request': request}).data)
