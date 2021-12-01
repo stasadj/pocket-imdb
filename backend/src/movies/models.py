@@ -61,7 +61,8 @@ class Movie(models.Model):
         cover = request.FILES.get('cover')
         images = CoverImages.objects.create(
             thumbnail=cover, full_size=cover)
-        return cls.objects.create(title=movie['title'], description=movie['description'], genre=movie['genre'], images=images)
+        return cls.objects.create(
+            title=movie['title'], description=movie['description'], genre=movie['genre'], images=images)
 
     @classmethod
     def popular(cls):
