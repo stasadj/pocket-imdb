@@ -14,7 +14,6 @@ class MovieListCreateAPIView(ListCreateAPIView):
     serializer_class = MovieSerializer
 
     def get_queryset(self):
-        # return Movie.get_queryset(self.request)
         return get_queryset_elasticsearch(self.request)
 
     def create(self, request):
