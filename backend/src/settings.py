@@ -46,6 +46,8 @@ INSTALLED_APPS = [
     'corsheaders',
     'easy_thumbnails',  # image lib
     'django_celery_results',
+    'django_elasticsearch_dsl',
+    'django_elasticsearch_dsl_drf',
 
     # YOUR APPS
     'src.auths',
@@ -215,3 +217,10 @@ CELERY_RESULT_SERIALIZER = 'json'
 CELERY_TIMEZONE = 'Europe/Berlin'
 
 CELERY_RESULT_BACKEND = 'django-db'
+
+# Elasticsearch configuration
+ELASTICSEARCH_DSL = {
+    'default': {
+        'hosts': 'localhost:9200'
+    },
+}
