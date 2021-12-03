@@ -16,6 +16,8 @@ import {
 
 import { HOME } from '../../routes/routes';
 
+import socket from '../../socket';
+
 export function* moviesGet({ payload }) {
   try {
     const { data } = yield call(movieService.getMovies, payload);
@@ -102,6 +104,7 @@ export function* movieLike({ payload }) {
 
     yield put(setMovie(data));
     yield put(updateMovie(data));
+    socket.emit('like');
   } catch (error) {
     console.log({ error }); /*eslint-disable-line*/
   }
@@ -113,6 +116,7 @@ export function* movieDislike({ payload }) {
 
     yield put(setMovie(data));
     yield put(updateMovie(data));
+    socket.emit('dislike');
   } catch (error) {
     console.log({ error }); /*eslint-disable-line*/
   }
@@ -123,6 +127,7 @@ export function* movieComment({ payload }) {
     const { data } = yield call(movieService.postComment, payload);
 
     yield put(addComment(data));
+    socket.emit('comment');
   } catch (error) {
     console.log({ error }); /*eslint-disable-line*/
   }
