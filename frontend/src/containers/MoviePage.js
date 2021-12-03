@@ -7,6 +7,7 @@ import {
   likeMovie,
   dislikeMovie,
   addRemoveWatchList,
+  getMovie,
 } from '../store/actions/MovieActions';
 import { currentMovie } from '../store/selectors/MovieSelectors';
 
@@ -26,6 +27,8 @@ import RelatedMovies from '../component/movie/RelatedMovies';
 
 import config from '../config';
 
+import socket from '../socket';
+
 const MoviePage = () => {
   const dispatch = useDispatch();
   const params = useParams();
@@ -34,6 +37,12 @@ const MoviePage = () => {
   useEffect(() => {
     dispatch(incrementViews(params.id));
   }, [params.id]);
+
+  useEffect(() => {
+    socket.on('update', (data) => {
+      dispatch(getMovie(params.id));
+    });
+  }, []);
 
   return (
     <Row className="offset-1">
