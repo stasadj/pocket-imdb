@@ -104,7 +104,7 @@ export function* movieLike({ payload }) {
 
     yield put(setMovie(data));
     yield put(updateMovie(data));
-    socket.emit('dislike');
+    socket.emit('like');
   } catch (error) {
     console.log({ error }); /*eslint-disable-line*/
   }
