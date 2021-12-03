@@ -17,6 +17,8 @@ import { movieComments } from '../../store/selectors/MovieSelectors';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 
+import socket from '../../socket';
+
 const validationSchema = Yup.object({
   content: Yup.string()
     .max(500, 'Must be 500 characters or less')
@@ -28,12 +30,16 @@ const CommentSection = () => {
   const pathParams = useParams();
   const comments = useSelector(movieComments);
 
-  const [params, setParams] = useState({});
+  const [params, setParams] = useState({ id: pathParams.id, limit: 5 });
 
   useEffect(() => {
     const newParams = { id: pathParams.id, limit: 5 };
     dispatch(getComments(newParams));
     setParams(newParams);
+
+    socket.on('update', (data) => {
+      dispatch(getComments(params));
+    });
   }, [pathParams.id]);
 
   const formik = useFormik({

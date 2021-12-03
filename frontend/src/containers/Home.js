@@ -12,6 +12,8 @@ import MovieCard from '../component/movie/MovieCard';
 import PopularMovies from '../component/movie/PopularMovies';
 import MoviePagination from '../component/movie/MoviePagination';
 
+import socket from '../socket';
+
 const Home = () => {
   const dispatch = useDispatch();
   const movies = useSelector(allMovies);
@@ -24,6 +26,10 @@ const Home = () => {
   useEffect(() => {
     dispatch(getMovies(queryParams));
     dispatch(getGenres());
+
+    socket.on('update', (data) => {
+      dispatch(getMovies(queryParams));
+    });
   }, []);
 
   const getOptions = () => {
